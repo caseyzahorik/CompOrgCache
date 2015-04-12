@@ -7,8 +7,25 @@ processor::processor(l1cache* icache,l1cache* dcache,watcher* thewatcher)
         Watcher = thewatcher;
 }
 
-processor::int decode(/*WHAT GOES HERE*/)
+processor::int decode(char op, unsigned long long int address, unsigned int bytes)
 {
+	unsigned long long int time = 0;
+	if(op == 'I')
+	{
+		//instruction command
+		time = fetchInstr(address, bytes);
+	}
+	else if(op == 'R')
+	{
+		//Data Read Command
+		time = read(address, bytes);
+	}
+	else if(op == 'W')
+	{
+		//Data Write command
+		time = write(address, bytes); 
+	}
+	return time; // we are going to want to keep track of this in the watcher or just pass it back to the main like this
 }
 
 processor::int fetchInstr(ull address, uint bytes)

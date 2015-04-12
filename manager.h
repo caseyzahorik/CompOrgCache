@@ -8,6 +8,8 @@
 #include "memory.h"
 #include "watcher.h"
 #include "types.h"
+#include <stdio.h>
+
 
 class manager
 {

@@ -1,6 +1,6 @@
 #include "manager.h"
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
         //default memory parameters
         int send = 10;
@@ -23,6 +23,24 @@ int main(int argc, char** argv)
         int l1miss = 1;
 
         //put in config file stuff here!
+	if(argv[1] == NULL)
+	{
+		printf("you done goofed up the input\nrun as follows: [zcat/cat] [trace file name/location] | [simulator] [config file name/location]");
+		return 0;
+	}
+	FILE * configFile = fopen(argv[1], "r");
+	//then read things in... not sure yet what the format is though so this will have to be completed later
+	fclose(configFile); 
+	
+	//read in from stdin from gcat
+	char op;
+	unsigned long long int address;
+	unsigned int bytes;
+	unsigned long long int timeTotal = 0;
+	while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
+	{
+		timeTotal += processor::decode(op, address, bytes);
+	}
 
         watcher Watcher;
         memory Disk(send,ready,trans,bus,Watcher);
