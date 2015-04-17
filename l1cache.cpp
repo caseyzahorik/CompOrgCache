@@ -43,8 +43,9 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2)
         missTime = miss;
         L2 = l2;
         sets = (cacheSize/(associativity*blockSize));
-        blockSizeMask = ;//how do we calculate the mask?
-        indexMask = ;// same question
+        blockSizeMask = ~((ull)block-1);
+        indexMask = ~((ull)sets-1);
+        indexShift = std::log2(sets);
         set = new way*[sets];
         way* temp = nullptr;
         for(int i=0;i<sets;i++)
@@ -89,8 +90,9 @@ int l1cache::read(ull address)
 //at this point, the address is now aligned to 4 byte boundaries
 //from here, we align it to blockSize boundaries, i guess
         ull time=0;
-        address=(address/blockSize)*blockSize;
-        int index = address%sets;
+        address=address&blockSizeMask;
+        int index = address>>indexShift;
+        index&=indexMask;
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
                 time+=missTime+L2->read(address,blockSize);
@@ -101,8 +103,9 @@ int l1cache::read(ull address)
 int l1cache::write(ull address)
 {
         ull time=0;
-        address=(address/blockSize)*blockSize;
-        int index = address%sets;
+        address=address&blockSizeMask;
+        int index = address>>indexShift;
+        index&=indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
                 time+=missTime+L2->write(address,blockSize);

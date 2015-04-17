@@ -25,6 +25,7 @@ private:
         int sets;// number of sets
         ull blockSizeMask;
         ull indexMask;
+        ull indexShift;
         memory* mainMemory;//pointer to main memory
 public:
         //l2cache();

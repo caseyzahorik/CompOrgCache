@@ -49,8 +49,9 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
         busWidth = bus;
         mainMemory = Memory;
         sets = cacheSize/(blockSize*associativity);
-        blockSizeMask = ;
-        indexMask = ;
+        blockSizeMask = ~((ull)block-1);
+        indexMask = ~((ull)sets-1);
+        indexShift = std::log2(sets);
         set = new way* [sets];
         way* temp=nullptr;
         for(int i=0;i<sets;i++)
@@ -76,8 +77,9 @@ int l2cache::BusWidth(){return busWidth;}
 int l2cache::read(ull address,int block)
 {
         ull time=0;
-        address=(address/blockSize)*blockSize;
-        int index = address%sets;
+        address=address&blockSizeMask;
+        int index = address>>indexShift;
+        index&=indexMask;
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
                 time+=missTime+mainMemory->transferData(blockSize);
@@ -88,8 +90,9 @@ int l2cache::read(ull address,int block)
 int l2cache::write(ull address,int block)
 {
         ull time=0;
-        address=(address/blockSize)*blockSize;
-        int index = address%sets;
+        address=address&blockSizeMask;
+        int index = address>>indexShift;
+        index&=indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
                 time+=missTime+mainMemory->transferData(blockSize);
