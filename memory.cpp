@@ -1,22 +1,23 @@
 #include "memory.h"
 
-memory::memory()
-{
-        Watcher = nullptr;
-        sendTime = 10;
-        readyTime = 30;
-        transferTime = 15;
-        busWidth = 8;
-}
-
-memory::memory(watcher* watch)
-{
-        Watcher = watch;
-        sendTime = 10;
-        readyTime = 30;
-        transferTime = 15;
-        busWidth = 8;
-}
+//memory::memory()
+//{
+//        Watcher = nullptr;
+//        sendTime = 10;
+//        readyTime = 30;
+//        transferTime = 15;
+//        busWidth = 8;
+//}
+//
+//memory::memory(watcher* watch)
+//{
+//        Watcher = watch;
+//        sendTime = 10;
+//        readyTime = 30;
+//        transferTime = 15;
+//        busWidth = 8;
+//}
+//also commented out due to perceived uselessness
 
 memory::memory(int send,int ready,int trans,int bus,watcher* watch)
 {

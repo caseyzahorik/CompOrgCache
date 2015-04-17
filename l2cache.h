@@ -23,10 +23,12 @@ private:
         int busWidth;//width of bus in bytes, //power of two
         way** set;// the array of the sets
         int sets;// number of sets
+        ull blockSizeMask;
+        ull indexMask;
         memory* mainMemory;//pointer to main memory
 public:
-        l2cache();
-        l2cache(memory* Memory);
+        //l2cache();
+        //l2cache(memory* Memory);
         l2cache(int block,int cache, int assoc, int hit, int miss, int trans, int bus, memory* Memory);
         int BlockSize();
         int CacheSize();

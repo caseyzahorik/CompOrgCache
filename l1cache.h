@@ -18,8 +18,11 @@ private:
         int missTime;
         way** set;
         int sets;// number of sets
+        ull blockSizeMask;
+        ull indexMask;
         l2cache* L2;
 public:
+        l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2);
         int BlockSize();
         int CacheSize();
         int Associativity();

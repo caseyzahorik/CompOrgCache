@@ -13,8 +13,8 @@ private:
         int transferTime;//time for 1 bus width of data
         int busWidth;//width of the memory interface in bytes
 public:
-        memory();
-        memory(watcher* watch);
+        //memory();
+        //memory(watcher* watch);
         memory(int send,int ready,int trans,int bus,watcher* watch);
         int setWatcher(watcher* watch);
         int setSendTime(int send);

@@ -77,12 +77,16 @@ int way::write(way** head, ull address)
         return -1;
 }
 
-int way::fill(way** head, ull address)
+ull way::fill(way** head, ull address)
 {
         way* node = *head;
         while(node->next!=nullptr)
         {
                 node=node->next;
+        }
+        if(node->dirty==true)
+        {
+                return address
         }
         node->tag=address;
         node->valid=true;

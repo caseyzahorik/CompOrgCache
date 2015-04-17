@@ -1,36 +1,38 @@
 #include "l1cache.h"
 
-l1cache::l1cache()
-{
-        blockSize = 32;
-        cacheSize = 8192;
-        associativity = 1;
-        hitTime = 1;
-        missTime = 1;
-        L2 = nullptr;
-        sets = (cacheSize/blockSize);
-        set = new way*[sets];
-        for(int i=0;i<sets;i++)
-        {
-                set[i] = new way();
-        }
-}
-
-l1cache::l1cache(l2cache* l2)
-{
-        blockSize = 32;
-        cacheSize = 8192;
-        associativity = 1;
-        hitTime = 1;
-        missTime = 1;
-        L2 = l2;
-        sets = (cacheSize/blockSize);
-        set = new way*[sets];
-        for(int i=0;i<sets;i++)
-        {
-                set[i] = new way();
-        }
-}
+//l1cache::l1cache()
+//{
+//        blockSize = 32;
+//        cacheSize = 8192;
+//        associativity = 1;
+//        hitTime = 1;
+//        missTime = 1;
+//        L2 = nullptr;
+//        sets = (cacheSize/blockSize);
+//        set = new way*[sets];
+//        for(int i=0;i<sets;i++)
+//        {
+//                set[i] = new way();
+//        }
+//}
+//
+//l1cache::l1cache(l2cache* l2)
+//{
+//        blockSize = 32;
+//        cacheSize = 8192;
+//        associativity = 1;
+//        hitTime = 1;
+//        missTime = 1;
+//        L2 = l2;
+//        sets = (cacheSize/blockSize);
+//        set = new way*[sets];
+//        for(int i=0;i<sets;i++)
+//        {
+//                set[i] = new way();
+//        }
+//}
+//these functions taken out for the time being, not necessary
+//to be deleted later when this is confirmed
 
 l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2)
 {
@@ -41,6 +43,8 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2)
         missTime = miss;
         L2 = l2;
         sets = (cacheSize/(associativity*blockSize));
+        blockSizeMask = ;//how do we calculate the mask?
+        indexMask = ;// same question
         set = new way*[sets];
         way* temp = nullptr;
         for(int i=0;i<sets;i++)

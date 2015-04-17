@@ -23,24 +23,15 @@ int main(int argc, char* argv[])
         int l1miss = 1;
 
         //put in config file stuff here!
-	if(argv[1] == NULL)
-	{
-		printf("you done goofed up the input\nrun as follows: [zcat/cat] [trace file name/location] | [simulator] [config file name/location]");
-		return 0;
-	}
-	FILE * configFile = fopen(argv[1], "r");
-	//then read things in... not sure yet what the format is though so this will have to be completed later
-	fclose(configFile); 
-	
-	//read in from stdin from gcat
-	char op;
-	unsigned long long int address;
-	unsigned int bytes;
-	unsigned long long int timeTotal = 0;
-	while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
-	{
-		timeTotal += processor::decode(op, address, bytes);
-	}
+        if(argv[1] == NULL)
+        {
+                printf("you done goofed up the input\nrun as follows: [zcat/cat] [trace file name/location] | [simulator] [config file name/location]");
+                return 0;
+        }
+        FILE * configFile = fopen(argv[1], "r");
+        //then read things in... not sure yet what the format is though so this will have to be completed later
+        fclose(configFile);
+
 
         watcher Watcher;
         memory Disk(send,ready,trans,bus,Watcher);
@@ -48,4 +39,14 @@ int main(int argc, char* argv[])
         l1cache Dcache(l1block,l1cache,l1assoc,l1hit,l1miss,l2,Watcher);
         l1cache Icache(l1block,l1cache,l1assoc,l1hit,l1miss,l2,Watcher);
         processor CPU(Icache,Dcache,Watcher);
+
+        //read in from stdin from gcat
+        char op;
+        ull address;
+        uint bytes;
+        ull timeTotal = 0;
+        while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
+        {
+        	timeTotal += processor::decode(op, address, bytes);
+        }
 }
