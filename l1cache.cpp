@@ -1,41 +1,8 @@
 #include "l1cache.h"
 
-//l1cache::l1cache()
-//{
-//        blockSize = 32;
-//        cacheSize = 8192;
-//        associativity = 1;
-//        hitTime = 1;
-//        missTime = 1;
-//        L2 = nullptr;
-//        sets = (cacheSize/blockSize);
-//        set = new way*[sets];
-//        for(int i=0;i<sets;i++)
-//        {
-//                set[i] = new way();
-//        }
-//}
-//
-//l1cache::l1cache(l2cache* l2)
-//{
-//        blockSize = 32;
-//        cacheSize = 8192;
-//        associativity = 1;
-//        hitTime = 1;
-//        missTime = 1;
-//        L2 = l2;
-//        sets = (cacheSize/blockSize);
-//        set = new way*[sets];
-//        for(int i=0;i<sets;i++)
-//        {
-//                set[i] = new way();
-//        }
-//}
-//these functions taken out for the time being, not necessary
-//to be deleted later when this is confirmed
-
-l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2)
+l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watcher* watch)
 {
+        Watcher = watch;
         blockSize = block;
         cacheSize = cache;
         associativity = assoc;
@@ -58,31 +25,6 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2)
                         temp->prev->next=temp;
                 }
         }
-}
-
-int l1cache::BlockSize()
-{
-        return blockSize;
-}
-
-int l1cache::CacheSize()
-{
-        return cacheSize;
-}
-
-int l1cache::Associativity()
-{
-        return associativity;
-}
-
-int l1cache::HitTime()
-{
-        return hitTime;
-}
-
-int l1cache::MissTime()
-{
-        return missTime;
 }
 
 int l1cache::read(ull address)

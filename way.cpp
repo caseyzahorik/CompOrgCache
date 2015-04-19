@@ -1,3 +1,4 @@
+#include "way.h"
 
 way::way()
 {

@@ -5,15 +5,11 @@
 
 class way
 {
-private:
-        watcher* Watcher;
-        int promote(way** head);
 public:
+        int promote(way** head);
 
         bool valid;
-        ull tag;//do we want to store the whole address
-        //or do we just want to store a part of it... is the
-        //memory usage worth the hastle of cutting up the address?
+        ull tag;
         bool dirty;
         way* next;
         way* prev;

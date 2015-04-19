@@ -1,45 +1,8 @@
 #include "l2cache.h"
 
-//l2cache::l2cache()
-//{
-//        blockSize = 64;
-//        cacheSize = 32768;
-//        associativity = 1;
-//        hitTime = 5;
-//        missTime = 7;
-//        transferTime = 5;
-//        busWidth = 16;
-//        mainMemory = nullptr;
-//        sets = (cacheSize/blockSize);
-//        set = new way*[sets];
-//        for(int i=0;i<sets;i++)
-//        {
-//                set[i] = new way();
-//        }
-//}
-//
-//l2cache::l2cache(memory* Memory)
-//{
-//        blockSize = 64;
-//        cacheSize = 32768;
-//        associativity = 1;
-//        hitTime = 5;
-//        missTime = 7;
-//        transferTime = 5;
-//        busWidth = 16;
-//        mainMemory = Memory;
-//        sets = (cacheSize/blockSize);
-//        set = new way*[sets];
-//        for(int i=0;i<sets;i++)
-//        {
-//                set[i] = new way();
-//        }
-//}
-//these functions are also probably unnecessary, so i'v commented
-//them out for the time being
-
-l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bus,memory* Memory)
+l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bus,memory* Memory,watcher* watch)
 {
+        Watcher = watch;
         blockSize = block;
         cacheSize = cache;
         associativity = assoc;
@@ -65,14 +28,6 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
                 }
         }
 }
-
-int l2cache::BlockSize(){return blockSize;}
-int l2cache::CacheSize(){return cacheSize;}
-int l2cache::Associativity(){return associativity;}
-int l2cache::HitTime(){return hitTime;}
-int l2cache::MissTime(){return missTime;}
-int l2cache::TransferTime(){return transferTime;}
-int l2cache::BusWidth(){return busWidth;}
 
 int l2cache::read(ull address,int block)
 {

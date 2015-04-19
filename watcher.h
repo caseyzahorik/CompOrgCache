@@ -5,13 +5,13 @@
 
 class watcher
 {
-private:
+public:
         ull executeTime;
         ull flushTime;
         ull totalRef;
         ull instRef
         ull dataRef
-public:
+
         watcher();
 };
 

@@ -10,8 +10,8 @@
 class l1cache
 {
 private:
+public:
         watcher* Watcher;
-
         int blockSize;
         int cacheSize;
         int associativity;
@@ -23,13 +23,8 @@ private:
         ull indexMask;
         ull indexShift;
         l2cache* L2;
-public:
-        l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2);
-        int BlockSize();
-        int CacheSize();
-        int Associativity();
-        int HitTime();
-        int MissTime();
+
+        l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watcher* watch);
         int read(ull address);
         int write(ull address);
         int flushAll();

@@ -1,4 +1,11 @@
-#include "manager.h"
+#include "processor.h"
+#include "l1cache.h"
+#include "l2cache.h"
+#include "way.h"
+#include "memory.h"
+#include "watcher.h"
+#include "types.h"
+#include <stdio.h>
 
 int main(int argc, char* argv[])
 {
@@ -34,11 +41,11 @@ int main(int argc, char* argv[])
 
 
         watcher Watcher;
-        memory Disk(send,ready,trans,bus,Watcher);
-        l2cache L2(l2block,l2cache,l2assoc,l2hit,l2miss,l2trans,l2bus,Disk,Watcher);
-        l1cache Dcache(l1block,l1cache,l1assoc,l1hit,l1miss,l2,Watcher);
-        l1cache Icache(l1block,l1cache,l1assoc,l1hit,l1miss,l2,Watcher);
-        processor CPU(Icache,Dcache,Watcher);
+        memory Disk(send,ready,trans,bus,&Watcher);
+        l2cache L2(l2block,l2cache,l2assoc,l2hit,l2miss,l2trans,l2bus,&Disk,&Watcher);
+        l1cache Dcache(l1block,l1cache,l1assoc,l1hit,l1miss,&l2,&Watcher);
+        l1cache Icache(l1block,l1cache,l1assoc,l1hit,l1miss,&l2,&Watcher);
+        processor CPU(&Icache,&Dcache,&Watcher);
 
         //read in from stdin from gcat
         char op;
