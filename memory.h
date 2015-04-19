@@ -18,7 +18,7 @@ public:
         //width of the memory bus in bytes
 
         memory(int send,int ready,int trans,int bus,watcher* watch);
-        int transferData(int size);
+        ull transferData(int size);
 }
 
 #endif

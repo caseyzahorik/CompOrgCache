@@ -26,10 +26,11 @@ public:
         ull indexShift;
         memory* mainMemory;
 
-        l2cache(int block,int cache, int assoc, int hit, int miss, int trans, int bus, memory* Memory,watcher* watch);
-        int read(ull address,int block);
-        int write(ull address,int block);
-        int flushAll();
+        l2cache(int block,int cache,int assoc, int hit,int miss,int trans,int bus,memory* Memory,watcher* watch);
+        ~l2cache();
+        ull read(ull address,int block);
+        ull write(ull address,int block);
+        ull flushAll();
 };
 
 #endif

@@ -54,6 +54,6 @@ int main(int argc, char* argv[])
         ull timeTotal = 0;
         while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
         {
-        	timeTotal += processor::decode(op, address, bytes);
+                timeTotal += processor->decode(op, address, bytes);
         }
 }

@@ -9,7 +9,7 @@ memory::memory(int send,int ready,int trans,int bus,watcher* watch)
         busWidth = bus;
 }
 
-int memory::transferData(int size)
+ull memory::transferData(int size)
 {
         return (sendTime+readyTime+transferTime*(size/busWidth));
 }

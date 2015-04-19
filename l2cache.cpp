@@ -29,7 +29,27 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
         }
 }
 
-int l2cache::read(ull address,int block)
+l2cache::~l2cache()
+{
+        way* head=nullptr;
+        for(int i=0;i<sets;i++)
+        {
+                head = set[i]
+                while(head->next!=nullptr)
+                {
+                        head=head->next;
+                }
+                while(head->prev!=nullptr)
+                {
+                        head=head->prev;
+                        delete(head->next);
+                }
+                delete(head);
+        }
+        delete[] set;
+}
+
+ull l2cache::read(ull address,int block)
 {
         ull time=0;
         address=address&blockSizeMask;
@@ -38,11 +58,16 @@ int l2cache::read(ull address,int block)
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
                 time+=missTime+mainMemory->transferData(blockSize);
+                ull writeback = set[index]->fill(&set[index],address)
+                if(writeback<ULLONG_MAX)
+                {
+                        time+=mainMemory->transferData(blockSize);
+                }
         }
-        return time+=hitTime+transferTime*block/busWidth;
+        return time+hitTime+transferTime*block/busWidth;
 }
 
-int l2cache::write(ull address,int block)
+ull l2cache::write(ull address,int block)
 {
         ull time=0;
         address=address&blockSizeMask;
@@ -51,12 +76,18 @@ int l2cache::write(ull address,int block)
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
                 time+=missTime+mainMemory->transferData(blockSize);
+                ull writeback = set[index]->fill(&set[index],address)
+                if(writeback<ULLONG_MAX)
+                {
+                        time+=mainMemory->transferData(blockSize);
+                }
         }
-        return hitTime+transferTime*block/busWidth;
+        return time+hitTime+transferTime*block/busWidth;
 }
 
-int l2cache::flushAll()
+ull l2cache::flushAll()
 {
+        ull time;
         for(int i=0;i<sets;i++)
         {
                 way* head = set[i];
@@ -64,11 +95,11 @@ int l2cache::flushAll()
                 {
                         if(head->dirty)
                         {
-                                int time = mainMemory->transferData(blockSize);
-                                //DO SOMETHING HERE
+                                time = mainMemory->transferData(blockSize);
                         }
                         head=head->next;
                 }
                 set[i]->flush(&set[i]);
         }
+        return time;
 }

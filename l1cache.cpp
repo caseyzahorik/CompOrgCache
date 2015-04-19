@@ -27,7 +27,27 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watc
         }
 }
 
-int l1cache::read(ull address)
+l1cache::~l1cache()
+{
+        way* head=nullptr;
+        for(int i=0;i<sets;i++)
+        {
+                head = set[i]
+                while(head->next!=nullptr)
+                {
+                        head=head->next;
+                }
+                while(head->prev!=nullptr)
+                {
+                        head=head->prev;
+                        delete(head->next);
+                }
+                delete(head);
+        }
+        delete[] set;
+}
+
+ull l1cache::read(ull address)
 {
 //at this point, the address is now aligned to 4 byte boundaries
 //from here, we align it to blockSize boundaries, i guess
@@ -38,11 +58,16 @@ int l1cache::read(ull address)
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
                 time+=missTime+L2->read(address,blockSize);
+                ull writeback = set[index]->fill(&set[index],address)
+                if(writeback<ULLONG_MAX)
+                {
+                        time+=l2->write(writeback,blockSize);
+                }
         }
         return time+hitTime;
 }
 
-int l1cache::write(ull address)
+ull l1cache::write(ull address)
 {
         ull time=0;
         address=address&blockSizeMask;
@@ -50,13 +75,19 @@ int l1cache::write(ull address)
         index&=indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
-                time+=missTime+L2->write(address,blockSize);
+                time+=missTime+L2->read(address,blockSize);
+                ull writeback = set[index]->fill(&set[index],address)
+                if(writeback<ULLONG_MAX)
+                {
+                        time+=l2->write(writeback,blockSize);
+                }
         }
         return time+hitTime;
 }
 
-int l1cache::flushAll()
+ull l1cache::flushAll()
 {
+        ull time=0;
         for(int i=0;i<sets;i++)
         {
                 way* head = set[i];
@@ -64,11 +95,11 @@ int l1cache::flushAll()
                 {
                         if(head->dirty)
                         {
-                                int time = L2->write(head->tag);
-                                //DO SOMETHING HERE
+                                time+=L2->write(head->tag,blockSize);
                         }
                         head=head->next;
                 }
                 set[i]->flush(&set[i]);
         }
+        return time;
 }

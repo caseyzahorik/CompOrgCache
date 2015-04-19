@@ -2,6 +2,7 @@
 #define __way
 
 #include "types.h"
+#include <climits>
 
 class way
 {

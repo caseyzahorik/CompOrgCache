@@ -6,6 +6,7 @@
 #include "way.h"
 #include "types.h"
 #include <cmath>
+#include <climits>
 
 class l1cache
 {
@@ -25,9 +26,10 @@ public:
         l2cache* L2;
 
         l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watcher* watch);
-        int read(ull address);
-        int write(ull address);
-        int flushAll();
+        ~l1cache();
+        ull read(ull address);
+        ull write(ull address);
+        ull flushAll();
 };
 
 #endif
