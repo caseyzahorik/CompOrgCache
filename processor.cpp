@@ -2,9 +2,9 @@
 
 processor::processor(l1cache* icache,l1cache* dcache,watcher* thewatcher)
 {
+        Watcher = thewatcher;
         Icache = icache;
         Dcache = dcache;
-        Watcher = thewatcher;
 }
 
 ull processor::decode(char op, ull address, uint bytes)

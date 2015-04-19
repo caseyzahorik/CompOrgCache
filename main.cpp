@@ -46,6 +46,22 @@ int main(int argc, char* argv[])
         l1cache Dcache(l1block,l1cache,l1assoc,l1hit,l1miss,&l2,&Watcher);
         l1cache Icache(l1block,l1cache,l1assoc,l1hit,l1miss,&l2,&Watcher);
         processor CPU(&Icache,&Dcache,&Watcher);
+        //dcache info
+        Watcher->DcacheSize = l1cache;
+        Watcher->DcacheWays = l1assoc;
+        Watcher->DcacheBlock = l1block;
+        //icache info
+        Watcher->IcacheSize = l1cache;
+        Watcher->IcacheWays = l1assoc;
+        Watcher->IcacheBlock = l1block;
+        //l2cache info
+        Watcher->L2Size = l2cache;
+        Watcher->L2Ways = l2assoc;
+        Watcher->L2Block = l2block;
+        //main mem info
+        Watcher->ReadyTime = ready;
+        Watcher->ChunkSize = bus;
+        Watcher->ChunkTime = trans;
 
         //read in from stdin from gcat
         char op;

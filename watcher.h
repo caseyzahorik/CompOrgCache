@@ -26,18 +26,58 @@ public:
         ull ExecuteTime;
         ull FlushTime;
         ull TotalRef;
-        ull InstRef
-        ull DataRef
+        ull InstRef;
+        ull DataRef;
         //reference types
+        ull ReadCount;
+        ull WriteCount;
+        ull InstCound;
+        //TotalCount same as TotalRef
         //cycles per type
+        ull ReadCycles;
+        ull WriteCycles;
+        ull InstCycles;
+        //TotalCycles same as ExecuteTime
         //average cycles/type
+        int AvgRead;
+        int AvgWrite;
+        int AvgInst;
+        ull IdealAlign;
+        int IdealCPI;
+        ull IdealMisAlign;
+        int MisCPI;
         //icache specifics
+        ull iHitCount;
+        ull iMissCount;
+        ull iRequests;
+        ull iKickouts;
+        ull iDirtyKickout;
+        ull iTransKickout;
+        ull iFlushKickout;
         //dcache specifics
+        ull dHitCount;
+        ull dMissCount;
+        ull dRequests;
+        ull dKickouts;
+        ull dDirtyKickout;
+        ull dTransKickout;
+        ull dFlushKickout;
         //l2 specifics
+        ull LHitCount;
+        ull LMissCount;
+        ull LRequests;
+        ull LKickouts;
+        ull LDirtyKickout;
+        ull LTransKickout;
+        ull LFlushKickout;
         //cost data
+        //just calculate at printing
         //etc
+        ull Flushes;
+        ull Invalidates;
 
         watcher();
+        int print();
 };
 
 #endif
