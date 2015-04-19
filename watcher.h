@@ -2,6 +2,7 @@
 #define __watcher
 
 #include "types.h"
+#include <iostream>
 
 class watcher
 {
@@ -31,7 +32,7 @@ public:
         //reference types
         ull ReadCount;
         ull WriteCount;
-        ull InstCound;
+        ull InstCount;
         //TotalCount same as TotalRef
         //cycles per type
         ull ReadCycles;

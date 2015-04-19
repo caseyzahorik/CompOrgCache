@@ -16,11 +16,11 @@ watcher::watcher()
         ExecuteTime = 0;
         FlushTime = 0;
         TotalRef = 0;
-        InstRe = 0;
-        DataRe = 0;
+        InstRef = 0;
+        DataRef = 0;
         ReadCount = 0;
         WriteCount = 0;
-        InstCound = 0;
+        InstCount = 0;
         ReadCycles = 0;
         WriteCycles = 0;
         InstCycles = 0;
@@ -58,4 +58,52 @@ watcher::watcher()
 
 int watcher::print()
 {
+        //Memory System Info
+        cout<<"Memory system:"<<endl;
+        cout<<"\tDcache size = "<<DcacheSize;
+        cout<<" : ways = "<<DcacheWays<<" : ";
+        cout<<"block size = "<<DcacheBlock<<endl;
+        cout<<"\tIcache size = "<<IcacheSize;
+        cout<<" : ways = "<<IcacheWays<<" : ";
+        cout<<"block size = "<<IcacheBlock<<endl;
+        cout<<"\tL2-cache size = "<<L2Size;
+        cout<<" : ways = "<<L2Ways<<" : ";
+        cout<<"block size = "<<L2Block<<endl;
+        cout<<"\tMemory ready time = "<<ReadyTime;
+        cout<<" : chunksize = "<<ChunkSize<<" : ";
+        cout<<"chunktime = "<<ChunkTime<<endl;
+        cout<<endl;
+        //Basic Statistics
+        cout<<"Execute time = "<<ExecuteTime<<"; ";
+        cout<<"Total Refs = "<<TotalRef<<endl;
+        cout<<"Flush time = "<<FlushTime<<endl;
+        cout<<"Inst Refs = "<<InstRef<<"; ";
+        cout<<"Data Refs = "<<DataRef<<endl;
+        cout<<endl;
+        //reference types
+        cout<<"Number of reference types: [Percentage]"<<endl;
+        cout<<"\tReads = "<<ReadCount;
+        float percentage = (float)100*float(ReadCount)/float(TotalRef)
+        cout<<"\t["<<percentage<<"]"<<endl;
+        cout<<"\tWrites = "<<WriteCount;
+        percentage = (float)100*float(WriteCount)/float(TotalRef)
+        cout<<"\t["<<percentage<<"]"<<endl;
+        cout<<"\tInst. = "<<InstCount;
+        percentage = (float)100*float(InstCount)/float(TotalRef)
+        cout<<"\t["<<percentage<<"]"<<endl;
+        cout<<"\tTotal = "<<TotalRef<<endl;
+        //cycles per type
+        cout<<"Total cycles for activities: [Percentage]"<<endl;
+        cout<<"\tReads = "<<ReadCycles;
+        percentage = (float)100*float(ReadCycles)/float(ExecuteTime)
+        cout<<"\t["<<percentage<<"]"<<endl;
+        cout<<"\tWrites = "<<WriteCycles;
+        percentage = (float)100*float(WriteCycles)/float(ExecuteTime)
+        cout<<"\t["<<percentage<<"]"<<endl;
+        cout<<"\tInst. = "<<InstCycles;
+        percentage = (float)100*float(InstCycles)/float(ExecuteTime)
+        cout<<"\t["<<percentage<<"]"<<endl;
+        cout<<"\tTotal = "<<ExecuteTime<<endl;
+
+        return 0;
 }

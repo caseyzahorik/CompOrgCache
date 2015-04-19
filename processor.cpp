@@ -14,17 +14,28 @@ ull processor::decode(char op, ull address, uint bytes)
         {
                 case 'I':
                         time += fetchInstr(address, bytes);
+                        Watcher->InstRef++;
+                        Watcher->InstCount++;
+                        Watcher->InstCycles+=time;
                         break;
                 case 'R':
                         time += read(address, bytes);
+                        Watcher->DataRef++;
+                        Watcher->ReadCount++;
+                        Watcher->ReadCycles+=time;
                         break;
                 case 'W':
                         time += write(address, bytes);
+                        Watcher->DataRef++;
+                        Watcher->WriteCount++;
+                        Watcher->WriteCycles+=time;
                         break;
                 default:
                         break;
         }
-        return time;// we are going to want to keep track of this in the watcher or just pass it back to the main like this
+        Watcher->TotalRef++;
+        Watcher->ExecuteTime+=time;
+        return time;
 }
 
 ull processor::fetchInstr(ull address, uint bytes)

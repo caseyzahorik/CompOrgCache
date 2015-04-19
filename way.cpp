@@ -29,6 +29,7 @@ int way::promote(way** head)
                 this->prev->next = this->next;
                 this->prev = nullptr;
                 this->next = *head;
+                *head->prev = this;
                 *head = this;
         }
         return 0;
