@@ -6,7 +6,6 @@
 #include "way.h"
 #include "types.h"
 #include <cmath>
-#include <climits>
 
 class l1cache
 {

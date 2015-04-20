@@ -7,11 +7,11 @@
 
 class processor
 {
-private:
+public:
         watcher* Watcher;
         l1cache* Icache;
         l1cache* Dcache;
-public:
+
         processor(l1cache* icache,l1cache* dcache,watcher* thewatcher);
         ull decode(char op, ull address, uint bytes);
         ull fetchInstr(ull address, uint bytes);

@@ -59,43 +59,67 @@ l2cache::~l2cache()
 
 ull l2cache::read(ull address,int block)
 {
+        requests++;
         ull time=0;
         address=address&blockSizeMask;
         int index = address>>indexShift;
         index&=indexMask;
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
+                misscount++;
                 time+=missTime+mainMemory->transferData(blockSize);
-                ull writeback = set[index]->fill(&set[index],address)
-                if(writeback<ULLONG_MAX)
+                k_ret writeback = set[index]->fill(&set[index],address)
+                transfer++;
+                if(writeback.valid)
                 {
+                        if(writeback.dirty)
+                        {
+                                dirty++;
+                        }
+                        kickouts++;
                         time+=mainMemory->transferData(blockSize);
                 }
+        }
+        else
+        {
+                hitcount++;
         }
         return time+hitTime+transferTime*block/busWidth;
 }
 
 ull l2cache::write(ull address,int block)
 {
+        requests++;
         ull time=0;
         address=address&blockSizeMask;
         int index = address>>indexShift;
         index&=indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
+                misscount++;
                 time+=missTime+mainMemory->transferData(blockSize);
-                ull writeback = set[index]->fill(&set[index],address)
-                if(writeback<ULLONG_MAX)
+                k_ret writeback = set[index]->fill(&set[index],address)
+                transfer++;
+                if(writeback.valid)
                 {
+                        if(writeback.dirty)
+                        {
+                                dirty++;
+                        }
+                        kickouts++;
                         time+=mainMemory->transferData(blockSize);
                 }
+        }
+        else
+        {
+                hitcount++;
         }
         return time+hitTime+transferTime*block/busWidth;
 }
 
 ull l2cache::flushAll()
 {
-        ull time;
+        ull time=0;
         for(int i=0;i<sets;i++)
         {
                 way* head = set[i];
@@ -103,7 +127,9 @@ ull l2cache::flushAll()
                 {
                         if(head->dirty)
                         {
-                                time = mainMemory->transferData(blockSize);
+                                flush++;
+                                transfer++;
+                                time+=mainMemory->transferData(blockSize);
                         }
                         head=head->next;
                 }

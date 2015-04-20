@@ -72,16 +72,45 @@ int main(int argc, char* argv[])
         ull temp=0;
         while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
         {
-                flush++;
-                if(flush=380000)
+                if(op=='I') flush++;
+                if(flush==380000)
                 {
                         flush=0;
                         temp += Icache->flushAll();
                         temp += Dcache->flushAll();
                         temp += L2->flushAll();
                         Watcher->FlushTime +=temp;
+                        Watcher->ExecuteTime +=temp;
+                        Watcher->Flushes++;
+                        Watcher->Invalidates++;
                         temp=0;
                 }
                 timeTotal += processor->decode(op, address, bytes);
         }
+        //icache specifics
+        Watcher->iHitCount = Icache->hitcount;
+        Watcher->iMissCount = Icache->misscount;
+        Watcher->iRequests = Icache->requests;
+        Watcher->iKickouts = Icache->kickouts;
+        Watcher->iDirtyKickout = Icache->dirty;
+        Watcher->iTransKickout = Icache->transfer;
+        Watcher->iFlushKickout = Icache->flush;
+        //dcache specifics
+        Watcher->dHitCount = Dcache->hitcount;
+        Watcher->dMissCount = Dcache->misscount;
+        Watcher->dRequests = Dcache->requests;
+        Watcher->dKickouts = Dcache->kickouts;
+        Watcher->dDirtyKickout = Dcache->dirty;
+        Watcher->dTransKickout = Dcache->transfer;
+        Watcher->dFlushKickout = Dcache->flush;
+        //l2 specifics
+        Watcher->LHitCount = L2->hitcount;
+        Watcher->LMissCount = L2->misscount;
+        Watcher->LRequests = L2->requests;
+        Watcher->LKickouts = L2->kickouts;
+        Watcher->LDirtyKickout = L2->dirty;
+        Watcher->LTransKickout = L2->transfer;
+        Watcher->LFlushKickout = L2->flush;
+        Watcher->print();
+        return 0;
 }

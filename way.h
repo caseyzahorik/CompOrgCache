@@ -2,7 +2,6 @@
 #define __way
 
 #include "types.h"
-#include <climits>
 
 class way
 {
@@ -19,7 +18,7 @@ public:
         way(way* prev,way* next);
         int read(way** head, ull address);
         int write(way** head, ull address);
-        ull fill(way** head, ull address);
+        k_ret fill(way** head, ull address);
         int flush(way** head);//flush all ways
 };
 

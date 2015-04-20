@@ -78,18 +78,17 @@ int way::write(way** head, ull address)
         return -1;
 }
 
-ull way::fill(way** head, ull address)
+k_ret way::fill(way** head, ull address)
 {
-        ull retval = ULLONG_MAX;
+        k_ret retval;
         way* node = *head;
         while(node->next!=nullptr)
         {
                 node=node->next;
         }
-        if(node->dirty==true)
-        {
-                retval = address;
-        }
+        retval.address=node.tag;
+        retval.valid=node.valid;
+        retval.dirty=node.dirty;
         node->tag=address;
         node->valid=true;
         node->dirty=false;

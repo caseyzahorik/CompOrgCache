@@ -57,38 +57,60 @@ l1cache::~l1cache()
 
 ull l1cache::read(ull address)
 {
-//at this point, the address is now aligned to 4 byte boundaries
-//from here, we align it to blockSize boundaries, i guess
+        requests++;
         ull time=0;
         address=address&blockSizeMask;
         int index = address>>indexShift;
         index&=indexMask;
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
+                misscount++;
                 time+=missTime+L2->read(address,blockSize);
-                ull writeback = set[index]->fill(&set[index],address)
-                if(writeback<ULLONG_MAX)
+                k_ret writeback = set[index]->fill(&set[index],address)
+                transfer++;
+                if(writeback.valid)
                 {
-                        time+=l2->write(writeback,blockSize);
+                        if(writeback.dirty)
+                        {
+                                dirty++;
+                        }
+                        kickouts++;
+                        time+=l2->write(writeback.address,blockSize);
                 }
+        }
+        else
+        {
+                hitcount++;
         }
         return time+hitTime;
 }
 
 ull l1cache::write(ull address)
 {
+        requests++;
         ull time=0;
         address=address&blockSizeMask;
         int index = address>>indexShift;
         index&=indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
+                misscount++;
                 time+=missTime+L2->read(address,blockSize);
-                ull writeback = set[index]->fill(&set[index],address)
-                if(writeback<ULLONG_MAX)
+                k_ret writeback = set[index]->fill(&set[index],address)
+                transfer++;
+                if(writeback.valid)
                 {
-                        time+=l2->write(writeback,blockSize);
+                        if(writeback.dirty)
+                        {
+                                dirty++;
+                        }
+                        kickouts++;
+                        time+=l2->write(writeback.address,blockSize);
                 }
+        }
+        else
+        {
+                hitcount++;
         }
         return time+hitTime;
 }
@@ -103,6 +125,8 @@ ull l1cache::flushAll()
                 {
                         if(head->dirty)
                         {
+                                flush++;
+                                transfer++;
                                 time+=L2->write(head->tag,blockSize);
                         }
                         head=head->next;

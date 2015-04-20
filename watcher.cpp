@@ -92,6 +92,7 @@ int watcher::print()
         percentage = (float)100*float(InstCount)/float(TotalRef)
         cout<<"\t["<<percentage<<"]"<<endl;
         cout<<"\tTotal = "<<TotalRef<<endl;
+        cout<<endl;
         //cycles per type
         cout<<"Total cycles for activities: [Percentage]"<<endl;
         cout<<"\tReads = "<<ReadCycles;
@@ -104,6 +105,10 @@ int watcher::print()
         percentage = (float)100*float(InstCycles)/float(ExecuteTime)
         cout<<"\t["<<percentage<<"]"<<endl;
         cout<<"\tTotal = "<<ExecuteTime<<endl;
+        cout<<endl;
+        //average cycles per activity
+        cout<<"Average cycles per activity:";
+        cout<<endl<<"\tRead = ";
 
         return 0;
 }

@@ -40,13 +40,13 @@ public:
         ull InstCycles;
         //TotalCycles same as ExecuteTime
         //average cycles/type
-        int AvgRead;
-        int AvgWrite;
-        int AvgInst;
+        float AvgRead;
+        float AvgWrite;
+        float AvgInst;
         ull IdealAlign;
-        int IdealCPI;
+        float IdealCPI;
         ull IdealMisAlign;
-        int MisCPI;
+        float MisCPI;
         //icache specifics
         ull iHitCount;
         ull iMissCount;
