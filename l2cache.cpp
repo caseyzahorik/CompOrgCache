@@ -1,4 +1,5 @@
 #include "l2cache.h"
+using namespace std;
 
 l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bus,memory* Memory,watcher* watch)
 {

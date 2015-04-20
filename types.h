@@ -5,11 +5,11 @@ typedef unsigned long long int ull;
 
 typedef unsigned int uint;
 
-typedef struct k_ret
+typedef struct kickout
 {
         unsigned long long int address;
         bool dirty;
         bool valid;
-};
+} k_ret;
 
 #endif

@@ -1,4 +1,5 @@
 #include "l1cache.h"
+using namespace std;
 
 l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watcher* watch)
 {

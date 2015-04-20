@@ -6,6 +6,7 @@
 #include "watcher.h"
 #include "types.h"
 #include <cmath>
+using namespace std;
 
 class l2cache
 {
@@ -28,11 +29,11 @@ public:
 
         ull hitcount;
         ull misscount;
-        ull requests
-        ull kickouts
-        ull dirty
-        ull transfer
-        ull flush
+        ull requests;
+        ull kickouts;
+        ull dirty;
+        ull transfer;
+        ull flush;
 
         l2cache(int block,int cache,int assoc, int hit,int miss,int trans,int bus,memory* Memory,watcher* watch);
         ~l2cache();

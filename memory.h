@@ -2,6 +2,7 @@
 #define __memory
 
 #include "watcher.h"
+using namespace std;
 
 class memory
 {
@@ -19,6 +20,6 @@ public:
 
         memory(int send,int ready,int trans,int bus,watcher* watch);
         ull transferData(int size);
-}
+};
 
 #endif

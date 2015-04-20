@@ -2,6 +2,7 @@
 #define __way
 
 #include "types.h"
+using namespace std;
 
 class way
 {

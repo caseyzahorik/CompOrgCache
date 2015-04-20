@@ -6,6 +6,7 @@
 #include "way.h"
 #include "types.h"
 #include <cmath>
+using namespace std;
 
 class l1cache
 {
@@ -26,11 +27,11 @@ public:
 
         ull hitcount;
         ull misscount;
-        ull requests
-        ull kickouts
-        ull dirty
-        ull transfer
-        ull flush
+        ull requests;
+        ull kickouts;
+        ull dirty;
+        ull transfer;
+        ull flush;
 
         l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watcher* watch);
         ~l1cache();

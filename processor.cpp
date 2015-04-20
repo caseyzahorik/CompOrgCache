@@ -1,5 +1,7 @@
 #include "processor.h"
 
+using namespace std;
+
 processor::processor(l1cache* icache,l1cache* dcache,watcher* thewatcher)
 {
         Watcher = thewatcher;

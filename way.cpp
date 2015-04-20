@@ -1,4 +1,5 @@
 #include "way.h"
+using namespace std;
 
 way::way()
 {

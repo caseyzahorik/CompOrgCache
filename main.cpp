@@ -5,9 +5,12 @@
 #include "memory.h"
 #include "watcher.h"
 #include "types.h"
-#include <stdio.h>
+#include <iostream>
+#include <cstdio>
 
-int main(int argc, char* argv[])
+using namespace std;
+
+int main(int argc, char** argv)
 {
         //default memory parameters
         int send = 10;
@@ -30,14 +33,14 @@ int main(int argc, char* argv[])
         int l1miss = 1;
 
         //put in config file stuff here!
-        if(argv[1] == NULL)
-        {
-                printf("you done goofed up the input\nrun as follows: [zcat/cat] [trace file name/location] | [simulator] [config file name/location]");
-                return 0;
-        }
-        FILE * configFile = fopen(argv[1], "r");
-        //then read things in... not sure yet what the format is though so this will have to be completed later
-        fclose(configFile);
+        //if(argv[1] == NULL)
+        //{
+        //        printf("you done goofed up the input\nrun as follows: [zcat/cat] [trace file name/location] | [simulator] [config file name/location]\n");
+        //        return 0;
+        //}
+        //FILE * configFile = fopen(argv[1], "r");
+        ////then read things in... not sure yet what the format is though so this will have to be completed later
+        //fclose(configFile);
 
 
         watcher Watcher;
@@ -47,28 +50,28 @@ int main(int argc, char* argv[])
         l1cache Icache(l1block,l1cache,l1assoc,l1hit,l1miss,&l2,&Watcher);
         processor CPU(&Icache,&Dcache,&Watcher);
         //dcache info
-        Watcher->DcacheSize = l1cache;
-        Watcher->DcacheWays = l1assoc;
-        Watcher->DcacheBlock = l1block;
+        Watcher.DcacheSize = l1cache;
+        Watcher.DcacheWays = l1assoc;
+        Watcher.DcacheBlock = l1block;
         //icache info
-        Watcher->IcacheSize = l1cache;
-        Watcher->IcacheWays = l1assoc;
-        Watcher->IcacheBlock = l1block;
+        Watcher.IcacheSize = l1cache;
+        Watcher.IcacheWays = l1assoc;
+        Watcher.IcacheBlock = l1block;
         //l2cache info
-        Watcher->L2Size = l2cache;
-        Watcher->L2Ways = l2assoc;
-        Watcher->L2Block = l2block;
+        Watcher.L2Size = l2cache;
+        Watcher.L2Ways = l2assoc;
+        Watcher.L2Block = l2block;
         //main mem info
-        Watcher->ReadyTime = ready;
-        Watcher->ChunkSize = bus;
-        Watcher->ChunkTime = trans;
+        Watcher.ReadyTime = ready;
+        Watcher.ChunkSize = bus;
+        Watcher.ChunkTime = trans;
 
         //read in from stdin from gcat
         char op;
         ull address;
         uint bytes;
         ull timeTotal = 0;
-        flush = 0;
+        int flush = 0;
         ull temp=0;
         while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
         {
@@ -76,41 +79,41 @@ int main(int argc, char* argv[])
                 if(flush==380000)
                 {
                         flush=0;
-                        temp += Icache->flushAll();
-                        temp += Dcache->flushAll();
-                        temp += L2->flushAll();
-                        Watcher->FlushTime +=temp;
-                        Watcher->ExecuteTime +=temp;
-                        Watcher->Flushes++;
-                        Watcher->Invalidates++;
+                        temp += Icache.flushAll();
+                        temp += Dcache.flushAll();
+                        temp += L2.flushAll();
+                        Watcher.FlushTime +=temp;
+                        Watcher.ExecuteTime +=temp;
+                        Watcher.Flushes++;
+                        Watcher.Invalidates++;
                         temp=0;
                 }
-                timeTotal += processor->decode(op, address, bytes);
+                timeTotal += CPU.decode(op, address, bytes);
         }
         //icache specifics
-        Watcher->iHitCount = Icache->hitcount;
-        Watcher->iMissCount = Icache->misscount;
-        Watcher->iRequests = Icache->requests;
-        Watcher->iKickouts = Icache->kickouts;
-        Watcher->iDirtyKickout = Icache->dirty;
-        Watcher->iTransKickout = Icache->transfer;
-        Watcher->iFlushKickout = Icache->flush;
+        Watcher.iHitCount = Icache.hitcount;
+        Watcher.iMissCount = Icache.misscount;
+        Watcher.iRequests = Icache.requests;
+        Watcher.iKickouts = Icache.kickouts;
+        Watcher.iDirtyKickout = Icache.dirty;
+        Watcher.iTransKickout = Icache.transfer;
+        Watcher.iFlushKickout = Icache.flush;
         //dcache specifics
-        Watcher->dHitCount = Dcache->hitcount;
-        Watcher->dMissCount = Dcache->misscount;
-        Watcher->dRequests = Dcache->requests;
-        Watcher->dKickouts = Dcache->kickouts;
-        Watcher->dDirtyKickout = Dcache->dirty;
-        Watcher->dTransKickout = Dcache->transfer;
-        Watcher->dFlushKickout = Dcache->flush;
+        Watcher.dHitCount = Dcache.hitcount;
+        Watcher.dMissCount = Dcache.misscount;
+        Watcher.dRequests = Dcache.requests;
+        Watcher.dKickouts = Dcache.kickouts;
+        Watcher.dDirtyKickout = Dcache.dirty;
+        Watcher.dTransKickout = Dcache.transfer;
+        Watcher.dFlushKickout = Dcache.flush;
         //l2 specifics
-        Watcher->LHitCount = L2->hitcount;
-        Watcher->LMissCount = L2->misscount;
-        Watcher->LRequests = L2->requests;
-        Watcher->LKickouts = L2->kickouts;
-        Watcher->LDirtyKickout = L2->dirty;
-        Watcher->LTransKickout = L2->transfer;
-        Watcher->LFlushKickout = L2->flush;
-        Watcher->print();
+        Watcher.LHitCount = L2.hitcount;
+        Watcher.LMissCount = L2.misscount;
+        Watcher.LRequests = L2.requests;
+        Watcher.LKickouts = L2.kickouts;
+        Watcher.LDirtyKickout = L2.dirty;
+        Watcher.LTransKickout = L2.transfer;
+        Watcher.LFlushKickout = L2.flush;
+        Watcher.print();
         return 0;
-}
+};

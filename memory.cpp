@@ -1,4 +1,5 @@
 #include "memory.h"
+using namespace std;
 
 memory::memory(int send,int ready,int trans,int bus,watcher* watch)
 {

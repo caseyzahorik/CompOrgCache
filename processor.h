@@ -4,6 +4,7 @@
 #include "l1cache.h"
 #include "watcher.h"
 #include "types.h"
+using namespace std;
 
 class processor
 {
