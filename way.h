@@ -16,7 +16,7 @@ public:
         way* prev;
 
         way();
-        way(way* prev,way* next);
+        way(way*,way*);
         int read(way** head, ull address);
         int write(way** head, ull address);
         k_ret fill(way** head, ull address);

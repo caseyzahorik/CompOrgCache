@@ -1,9 +1,9 @@
 #ifndef __processor
 #define __processor
 
-#include "l1cache.h"
-#include "watcher.h"
 #include "types.h"
+#include "watcher.h"
+#include "l1cache.h"
 using namespace std;
 
 class processor
@@ -13,7 +13,7 @@ public:
         l1cache* Icache;
         l1cache* Dcache;
 
-        processor(l1cache* icache,l1cache* dcache,watcher* thewatcher);
+        processor(l1cache*,l1cache*,watcher*);
         ull decode(char op, ull address, uint bytes);
         ull fetchInstr(ull address, uint bytes);
         ull read(ull address,uint bytes);

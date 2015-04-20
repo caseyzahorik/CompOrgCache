@@ -1,12 +1,12 @@
-#include "processor.h"
-#include "l1cache.h"
-#include "l2cache.h"
-#include "way.h"
-#include "memory.h"
-#include "watcher.h"
-#include "types.h"
 #include <iostream>
 #include <cstdio>
+#include "types.h"
+#include "way.h"
+#include "watcher.h"
+#include "memory.h"
+#include "l2cache.h"
+#include "l1cache.h"
+#include "processor.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ int main(int argc, char** argv)
         int bus = 8;
         //default l2 parameters
         int l2block = 64;
-        int l2cache = 32768;
+        int l2size = 32768;
         int l2assoc = 1;
         int l2hit = 5;
         int l2miss = 7;
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
         int l2bus = 16;
         //default l1 parameters
         int l1block = 32;
-        int l1cache = 8192;
+        int l1size = 8192;
         int l1assoc = 1;
         int l1hit = 1;
         int l1miss = 1;
@@ -45,20 +45,20 @@ int main(int argc, char** argv)
 
         watcher Watcher;
         memory Disk(send,ready,trans,bus,&Watcher);
-        l2cache L2(l2block,l2cache,l2assoc,l2hit,l2miss,l2trans,l2bus,&Disk,&Watcher);
-        l1cache Dcache(l1block,l1cache,l1assoc,l1hit,l1miss,&l2,&Watcher);
-        l1cache Icache(l1block,l1cache,l1assoc,l1hit,l1miss,&l2,&Watcher);
+        l2cache L2(l2block,l2size,l2assoc,l2hit,l2miss,l2trans,l2bus,&Disk,&Watcher);
+        l1cache Dcache(l1block,l1size,l1assoc,l1hit,l1miss,&L2,&Watcher);
+        l1cache Icache(l1block,l1size,l1assoc,l1hit,l1miss,&L2,&Watcher);
         processor CPU(&Icache,&Dcache,&Watcher);
         //dcache info
-        Watcher.DcacheSize = l1cache;
+        Watcher.DcacheSize = l1size;
         Watcher.DcacheWays = l1assoc;
         Watcher.DcacheBlock = l1block;
         //icache info
-        Watcher.IcacheSize = l1cache;
+        Watcher.IcacheSize = l1size;
         Watcher.IcacheWays = l1assoc;
         Watcher.IcacheBlock = l1block;
         //l2cache info
-        Watcher.L2Size = l2cache;
+        Watcher.L2Size = l2size;
         Watcher.L2Ways = l2assoc;
         Watcher.L2Block = l2block;
         //main mem info

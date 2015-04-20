@@ -1,10 +1,10 @@
 #ifndef __watcher
 #define __watcher
 
-#include "types.h"
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include "types.h"
 
 using namespace std;
 

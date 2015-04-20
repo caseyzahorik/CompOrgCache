@@ -1,11 +1,11 @@
 #ifndef __l2cache
 #define __l2cache
 
-#include "way.h"
-#include "memory.h"
-#include "watcher.h"
-#include "types.h"
 #include <cmath>
+#include "types.h"
+#include "way.h"
+#include "watcher.h"
+#include "memory.h"
 using namespace std;
 
 class l2cache
@@ -35,7 +35,7 @@ public:
         ull transfer;
         ull flush;
 
-        l2cache(int block,int cache,int assoc, int hit,int miss,int trans,int bus,memory* Memory,watcher* watch);
+        l2cache(int,int,int,int,int,int,int,memory*,watcher*);
         ~l2cache();
         ull read(ull address,int block);
         ull write(ull address,int block);

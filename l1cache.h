@@ -1,16 +1,15 @@
 #ifndef __l1cache
 #define __l1cache
 
-#include "l2cache.h"
-#include "watcher.h"
-#include "way.h"
-#include "types.h"
 #include <cmath>
+#include "types.h"
+#include "way.h"
+#include "watcher.h"
+#include "l2cache.h"
 using namespace std;
 
 class l1cache
 {
-private:
 public:
         watcher* Watcher;
         int blockSize;
@@ -33,7 +32,7 @@ public:
         ull transfer;
         ull flush;
 
-        l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watcher* watch);
+        l1cache(int,int,int,int,int,l2cache*,watcher*);
         ~l1cache();
         ull read(ull address);
         ull write(ull address);
