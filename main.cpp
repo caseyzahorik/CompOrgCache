@@ -68,8 +68,20 @@ int main(int argc, char* argv[])
         ull address;
         uint bytes;
         ull timeTotal = 0;
+        flush = 0;
+        ull temp=0;
         while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
         {
+                flush++;
+                if(flush=380000)
+                {
+                        flush=0;
+                        temp += Icache->flushAll();
+                        temp += Dcache->flushAll();
+                        temp += L2->flushAll();
+                        Watcher->FlushTime +=temp;
+                        temp=0;
+                }
                 timeTotal += processor->decode(op, address, bytes);
         }
 }

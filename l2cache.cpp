@@ -27,6 +27,14 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
                         temp->prev->next=temp;
                 }
         }
+
+        hitcount=0;
+        misscount=0;
+        requests=0;
+        kickouts=0;
+        dirty=0;
+        transfer=0;
+        flush=0;
 }
 
 l2cache::~l2cache()

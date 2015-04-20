@@ -83,7 +83,7 @@ int watcher::print()
         //reference types
         cout<<"Number of reference types: [Percentage]"<<endl;
         cout<<"\tReads = "<<ReadCount;
-        float percentage = (float)100*float(ReadCount)/float(TotalRef)
+        float percentage=(float)100*float(ReadCount)/float(TotalRef)
         cout<<"\t["<<percentage<<"]"<<endl;
         cout<<"\tWrites = "<<WriteCount;
         percentage = (float)100*float(WriteCount)/float(TotalRef)
@@ -98,7 +98,7 @@ int watcher::print()
         percentage = (float)100*float(ReadCycles)/float(ExecuteTime)
         cout<<"\t["<<percentage<<"]"<<endl;
         cout<<"\tWrites = "<<WriteCycles;
-        percentage = (float)100*float(WriteCycles)/float(ExecuteTime)
+        percentage=(float)100*float(WriteCycles)/float(ExecuteTime)
         cout<<"\t["<<percentage<<"]"<<endl;
         cout<<"\tInst. = "<<InstCycles;
         percentage = (float)100*float(InstCycles)/float(ExecuteTime)

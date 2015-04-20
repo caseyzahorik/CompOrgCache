@@ -25,6 +25,14 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watc
                         temp->prev->next=temp;
                 }
         }
+
+        hitcount=0;
+        misscount=0;
+        requests=0;
+        kickouts=0;
+        dirty=0;
+        transfer=0;
+        flush=0;
 }
 
 l1cache::~l1cache()

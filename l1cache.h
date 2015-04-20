@@ -25,6 +25,14 @@ public:
         ull indexShift;
         l2cache* L2;
 
+        ull hitcount;
+        ull misscount;
+        ull requests
+        ull kickouts
+        ull dirty
+        ull transfer
+        ull flush
+
         l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watcher* watch);
         ~l1cache();
         ull read(ull address);
