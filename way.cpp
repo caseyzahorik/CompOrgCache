@@ -30,7 +30,7 @@ int way::promote(way** head)
                 this->prev->next = this->next;
                 this->prev = nullptr;
                 this->next = *head;
-                *head->prev = this;
+                (*head)->prev = this;
                 *head = this;
         }
         return 0;
@@ -87,9 +87,9 @@ k_ret way::fill(way** head, ull address)
         {
                 node=node->next;
         }
-        retval.address=node.tag;
-        retval.valid=node.valid;
-        retval.dirty=node.dirty;
+        retval.address=node->tag;
+        retval.valid=node->valid;
+        retval.dirty=node->dirty;
         node->tag=address;
         node->valid=true;
         node->dirty=false;

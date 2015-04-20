@@ -140,7 +140,7 @@ int watcher::print()
         percentage = float(iMissCount)/float(iRequests);
         cout<<" Miss Rate = ";
         cout<<setprecision(1)<<percentage<<"%"<<endl;
-        cout<<"\tKickouts = "<<iKickout<<"; ";
+        cout<<"\tKickouts = "<<iKickouts<<"; ";
         cout<<"Dirty Kickouts = "<<iDirtyKickout<<"; ";
         cout<<"Transfers= "<<iTransKickout<<"; "<<endl;
         cout<<"Flush Kickouts = "<<iFlushKickout<<endl;
@@ -156,7 +156,7 @@ int watcher::print()
         percentage = float(dMissCount)/float(dRequests);
         cout<<" Miss Rate = ";
         cout<<setprecision(1)<<percentage<<"%"<<endl;
-        cout<<"\tKickouts = "<<dKickout<<"; ";
+        cout<<"\tKickouts = "<<dKickouts<<"; ";
         cout<<"Dirty Kickouts = "<<dDirtyKickout<<"; ";
         cout<<"Transfers= "<<dTransKickout<<"; "<<endl;
         cout<<"Flush Kickouts = "<<dFlushKickout<<endl;
@@ -172,7 +172,7 @@ int watcher::print()
         percentage = float(LMissCount)/float(LRequests);
         cout<<" Miss Rate = ";
         cout<<setprecision(1)<<percentage<<"%"<<endl;
-        cout<<"\tKickouts = "<<LKickout<<"; ";
+        cout<<"\tKickouts = "<<LKickouts<<"; ";
         cout<<"Dirty Kickouts = "<<LDirtyKickout<<"; ";
         cout<<"Transfers= "<<LTransKickout<<"; "<<endl;
         cout<<"Flush Kickouts = "<<LFlushKickout<<endl;
@@ -180,19 +180,19 @@ int watcher::print()
         //l1cost
         dcost = 100*(log2(DcacheWays)+1);
         int temp = DcacheSize/4096;
-        dcost*=temp
+        dcost*=temp;
         icost = 100*(log2(IcacheWays)+1);
         temp = IcacheSize/4096;
-        icost*=temp
+        icost*=temp;
         cout<<"L1 cache cost (ICache $";
         cout<<icost<<") + (Dcache $";
         cout<<dcost<<") = $"<<(icost+dcost);
         cout<<endl;
         //l2cost
-        temp = 50*(log2(LcacheWays));
-        Lcost= LcacheSize/65536+1;
-        Lcost+=temp
-        cout<<"L2 cache cost = $"
+        temp = 50*(log2(L2Ways));
+        Lcost= L2Size/65536+1;
+        Lcost+=temp;
+        cout<<"L2 cache cost = $";
         cout<<Lcost<<"; ";
         //main mem cost
         cout<<"Memory cost = $75; ";

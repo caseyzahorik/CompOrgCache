@@ -41,7 +41,7 @@ l1cache::~l1cache()
         way* head=nullptr;
         for(int i=0;i<sets;i++)
         {
-                head = set[i]
+                head = set[i];
                 while(head->next!=nullptr)
                 {
                         head=head->next;
@@ -67,7 +67,7 @@ ull l1cache::read(ull address)
         {//note that read returns 0 on success
                 misscount++;
                 time+=missTime+L2->read(address,blockSize);
-                k_ret writeback = set[index]->fill(&set[index],address)
+                k_ret writeback = set[index]->fill(&set[index],address);
                 transfer++;
                 if(writeback.valid)
                 {
@@ -76,7 +76,7 @@ ull l1cache::read(ull address)
                                 dirty++;
                         }
                         kickouts++;
-                        time+=l2->write(writeback.address,blockSize);
+                        time+=L2->write(writeback.address,blockSize);
                 }
         }
         else
@@ -97,7 +97,7 @@ ull l1cache::write(ull address)
         {//note that read returns 0 on success
                 misscount++;
                 time+=missTime+L2->read(address,blockSize);
-                k_ret writeback = set[index]->fill(&set[index],address)
+                k_ret writeback = set[index]->fill(&set[index],address);
                 transfer++;
                 if(writeback.valid)
                 {
@@ -106,7 +106,7 @@ ull l1cache::write(ull address)
                                 dirty++;
                         }
                         kickouts++;
-                        time+=l2->write(writeback.address,blockSize);
+                        time+=L2->write(writeback.address,blockSize);
                 }
         }
         else

@@ -43,7 +43,7 @@ l2cache::~l2cache()
         way* head=nullptr;
         for(int i=0;i<sets;i++)
         {
-                head = set[i]
+                head = set[i];
                 while(head->next!=nullptr)
                 {
                         head=head->next;
@@ -69,7 +69,7 @@ ull l2cache::read(ull address,int block)
         {//note that read returns 0 on success
                 misscount++;
                 time+=missTime+mainMemory->transferData(blockSize);
-                k_ret writeback = set[index]->fill(&set[index],address)
+                k_ret writeback = set[index]->fill(&set[index],address);
                 transfer++;
                 if(writeback.valid)
                 {
@@ -99,7 +99,7 @@ ull l2cache::write(ull address,int block)
         {//note that read returns 0 on success
                 misscount++;
                 time+=missTime+mainMemory->transferData(blockSize);
-                k_ret writeback = set[index]->fill(&set[index],address)
+                k_ret writeback = set[index]->fill(&set[index],address);
                 transfer++;
                 if(writeback.valid)
                 {

@@ -4,8 +4,8 @@
 #include <cmath>
 #include "types.h"
 #include "way.h"
-#include "watcher.h"
 #include "memory.h"
+#include "watcher.h"
 using namespace std;
 
 class l2cache

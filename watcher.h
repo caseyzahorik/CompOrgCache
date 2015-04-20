@@ -1,8 +1,8 @@
 #ifndef __watcher
 #define __watcher
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <cmath>
 #include "types.h"
 
