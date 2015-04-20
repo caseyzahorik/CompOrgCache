@@ -3,6 +3,8 @@
 
 #include "types.h"
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 
 class watcher
 {
@@ -72,6 +74,9 @@ public:
         ull LTransKickout;
         ull LFlushKickout;
         //cost data
+        int dcost;
+        int icost;
+        int Lcost;
         //just calculate at printing
         //etc
         ull Flushes;
