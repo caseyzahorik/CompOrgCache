@@ -1,5 +1,5 @@
-#ifndef __memory
-#define __memory
+#ifndef __MEMORY
+#define __MEMORY
 
 #include "watcher.h"
 using namespace std;

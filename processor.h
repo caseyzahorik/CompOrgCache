@@ -1,5 +1,5 @@
-#ifndef __processor
-#define __processor
+#ifndef __PROCESSOR
+#define __PROCESSOR
 
 #include "types.h"
 #include "watcher.h"

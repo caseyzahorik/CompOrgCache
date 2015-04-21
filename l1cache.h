@@ -1,5 +1,5 @@
-#ifndef __l1cache
-#define __l1cache
+#ifndef __L1CACHE
+#define __L1CACHE
 
 #include <cmath>
 #include "types.h"

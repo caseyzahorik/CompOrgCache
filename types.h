@@ -1,5 +1,5 @@
-#ifndef __types
-#define __types
+#ifndef __TYPES
+#define __TYPES
 
 typedef unsigned long long int ull;
 

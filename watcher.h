@@ -1,5 +1,5 @@
-#ifndef __watcher
-#define __watcher
+#ifndef __WATCHER
+#define __WATCHER
 
 #include <cmath>
 #include <iostream>
