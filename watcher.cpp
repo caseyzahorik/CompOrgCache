@@ -53,6 +53,9 @@ watcher::watcher()
         LDirtyKickout = 0;
         LTransKickout = 0;
         LFlushKickout = 0;
+        dcost=0;
+        icost=0;
+        Lcost=0;
         Flushes = 0;
         Invalidates = 0;
 }

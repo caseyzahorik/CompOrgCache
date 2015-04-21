@@ -43,12 +43,14 @@ int main(int argc, char** argv)
         //fclose(configFile);
 
 
+        //main object declarations
         watcher Watcher;
         memory Disk(send,ready,trans,bus,&Watcher);
         l2cache L2(l2block,l2size,l2assoc,l2hit,l2miss,l2trans,l2bus,&Disk,&Watcher);
         l1cache Dcache(l1block,l1size,l1assoc,l1hit,l1miss,&L2,&Watcher);
         l1cache Icache(l1block,l1size,l1assoc,l1hit,l1miss,&L2,&Watcher);
         processor CPU(&Icache,&Dcache,&Watcher);
+
         //dcache info
         Watcher.DcacheSize = l1size;
         Watcher.DcacheWays = l1assoc;

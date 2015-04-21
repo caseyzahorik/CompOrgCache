@@ -1,5 +1,5 @@
-#ifndef __way
-#define __way
+#ifndef __WAY
+#define __WAY
 
 #include "types.h"
 using namespace std;
