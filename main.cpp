@@ -32,6 +32,7 @@ int main(int argc, char** argv)
         int l1hit = 1;
         int l1miss = 1;
 
+        if(argc==2)
         //put in config file stuff here!
         //if(argv[1] == NULL)
         //{
