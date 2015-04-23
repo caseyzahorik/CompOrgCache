@@ -137,10 +137,10 @@ int watcher::print()
         cout<<"\tHit Count = "<<iHitCount;
         cout<<" Miss Count = "<<iMissCount<<endl;
         cout<<"\tTotal Requests = "<<iRequests<<endl;
-        percentage = float(iHitCount)/float(iRequests);
+        percentage = float(100)*float(iHitCount)/float(iRequests);
         cout<<"\tHit Rate = ";
         cout<<setprecision(1)<<percentage<<"%";
-        percentage = float(iMissCount)/float(iRequests);
+        percentage = float(100)*float(iMissCount)/float(iRequests);
         cout<<" Miss Rate = ";
         cout<<setprecision(1)<<percentage<<"%"<<endl;
         cout<<"\tKickouts = "<<iKickouts<<"; ";
@@ -153,10 +153,10 @@ int watcher::print()
         cout<<"\tHit Count = "<<dHitCount;
         cout<<" Miss Count = "<<dMissCount<<endl;
         cout<<"\tTotal Requests = "<<dRequests<<endl;
-        percentage = float(dHitCount)/float(dRequests);
+        percentage = float(100)*float(dHitCount)/float(dRequests);
         cout<<"\tHit Rate = ";
         cout<<setprecision(1)<<percentage<<"%";
-        percentage = float(dMissCount)/float(dRequests);
+        percentage = float(100)*float(dMissCount)/float(dRequests);
         cout<<" Miss Rate = ";
         cout<<setprecision(1)<<percentage<<"%"<<endl;
         cout<<"\tKickouts = "<<dKickouts<<"; ";
@@ -169,10 +169,10 @@ int watcher::print()
         cout<<"\tHit Count = "<<LHitCount;
         cout<<" Miss Count = "<<LMissCount<<endl;
         cout<<"\tTotal Requests = "<<LRequests<<endl;
-        percentage = float(LHitCount)/float(LRequests);
+        percentage = float(100)*float(LHitCount)/float(LRequests);
         cout<<"\tHit Rate = ";
         cout<<setprecision(1)<<percentage<<"%";
-        percentage = float(LMissCount)/float(LRequests);
+        percentage = float(100)*float(LMissCount)/float(LRequests);
         cout<<" Miss Rate = ";
         cout<<setprecision(1)<<percentage<<"%"<<endl;
         cout<<"\tKickouts = "<<LKickouts<<"; ";

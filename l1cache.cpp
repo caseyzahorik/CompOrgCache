@@ -12,18 +12,20 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watc
         L2 = l2;
         sets = (cacheSize/(associativity*blockSize));
         blockSizeMask = ~((ull)block-1);
-        indexMask = ~((ull)sets-1);
+        indexMask = ((ull)sets-1);
         indexShift = std::log2(sets);
         set = new way*[sets];
-        way* temp = nullptr;
+        way* temp1=nullptr;
+        way* temp2=nullptr;
         for(int i=0;i<sets;i++)
         {
                 set[i] = new way();
-                temp = set[i];
-                for(int j=0;j<associativity;j++)
+                temp1 = set[i];
+                for(int j=1;j<associativity;j++)
                 {
-                        temp = new way(temp,nullptr);
-                        temp->prev->next=temp;
+                        temp2 = new way(temp1,nullptr);
+                        temp1->next=temp2;
+                        temp1 = temp2;
                 }
         }
 
@@ -36,25 +38,25 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watc
         flush=0;
 }
 
-l1cache::~l1cache()
-{
-        way* head=nullptr;
-        for(int i=0;i<sets;i++)
-        {
-                head = set[i];
-                while(head->next!=nullptr)
-                {
-                        head=head->next;
-                }
-                while(head->prev!=nullptr)
-                {
-                        head=head->prev;
-                        delete(head->next);
-                }
-                delete(head);
-        }
-        delete[] set;
-}
+//l1cache::~l1cache()
+//{
+//        way* head=nullptr;
+//        for(int i=0;i<sets;i++)
+//        {
+//                head = set[i];
+//                while(head->next!=nullptr)
+//                {
+//                        head=head->next;
+//                }
+//                while(head->prev!=nullptr)
+//                {
+//                        head=head->prev;
+//                        delete(head->next);
+//                }
+//                delete(head);
+//        }
+//        delete[] set;
+//}
 
 ull l1cache::read(ull address)
 {

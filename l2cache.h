@@ -36,7 +36,7 @@ public:
         ull flush;
 
         l2cache(int,int,int,int,int,int,int,memory*,watcher*);
-        ~l2cache();
+        //~l2cache();
         ull read(ull address,int block);
         ull write(ull address,int block);
         ull flushAll();

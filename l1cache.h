@@ -33,7 +33,7 @@ public:
         ull flush;
 
         l1cache(int,int,int,int,int,l2cache*,watcher*);
-        ~l1cache();
+        //~l1cache();
         ull read(ull address);
         ull write(ull address);
         ull flushAll();
