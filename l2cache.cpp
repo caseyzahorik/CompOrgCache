@@ -1,4 +1,5 @@
 #include "l2cache.h"
+#include <iostream>
 using namespace std;
 
 l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bus,memory* Memory,watcher* watch)
@@ -16,16 +17,25 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
         blockSizeMask = ~((ull)block-1);
         indexMask = ~((ull)sets-1);
         indexShift = std::log2(sets);
-        set = new way* [sets];
+        cout<<"l2 cache pre-set declaration"<<endl;
+        cout<<"sets : "<<sets<<endl;
+        set = new way*[sets];
+        cout<<"l2 cache post-set declaration"<<endl;
         way* temp=nullptr;
         for(int i=0;i<sets;i++)
         {
                 set[i] = new way();
+                cout<<"l2 cache way0 declaration"<<i<<endl;
                 temp = set[i];
                 for(int j=0;j<associativity;j++)
                 {
                         temp = new way(temp,nullptr);
-                        temp->prev->next=temp;
+                        cout<<"l2 cache way"<<j+1<<"declaration\n";
+                        (temp->prev)->next=temp;
+                        cout<<"l2 cache way next set test"<<endl;
+                        //TODO: discover the origin of the
+                        //next set test failure, and also make
+                        //the loop go from 1.
                 }
         }
 

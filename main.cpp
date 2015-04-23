@@ -34,18 +34,23 @@ int main(int argc, char** argv)
         int l1hit = 1;
         int l1miss = 1;
 
+        cout<<argc<<endl;
         if(argc==2)
         {
 
+                cout<<"test5"<<endl;
                 ifstream config;
                 config.open(string(argv[1]));
+                cout<<"test6"<<endl;
                 if(config.is_open())
                 {
+                        cout<<"test7"<<endl;
                         int c_args[16];
                         string temp;
                         for(int i=0;i<15;i++)
                         {
                                 getline(config,temp);
+                                cout<<"test8"<<endl;
                                 c_args[i] = stoi(temp,nullptr,10);
                         }
                         send    = c_args[0];
@@ -64,7 +69,9 @@ int main(int argc, char** argv)
                         l1assoc = c_args[13];
                         l1hit   = c_args[14];
                         l1miss  = c_args[15];
+                        cout<<"test9"<<endl;
                         config.close();
+                        cout<<"test10"<<endl;
                 }
                 else
                 {
@@ -72,24 +79,20 @@ int main(int argc, char** argv)
                         return 0;
                 }
         }
-        //put in config file stuff here!
-        //if(argv[1] == NULL)
-        //{
-        //        printf("you done goofed up the input\nrun as follows: [zcat/cat] [trace file name/location] | [simulator] [config file name/location]\n");
-        //        return 0;
-        //}
-        //FILE * configFile = fopen(argv[1], "r");
-        ////then read things in... not sure yet what the format is though so this will have to be completed later
-        //fclose(configFile);
-
 
         //main object declarations
         watcher Watcher;
+        cout<<"test11"<<endl;
         memory Disk(send,ready,trans,bus,&Watcher);
+        cout<<"test12"<<endl;
         l2cache L2(l2block,l2size,l2assoc,l2hit,l2miss,l2trans,l2bus,&Disk,&Watcher);
+        cout<<"test13"<<endl;
         l1cache Dcache(l1block,l1size,l1assoc,l1hit,l1miss,&L2,&Watcher);
+        cout<<"test14"<<endl;
         l1cache Icache(l1block,l1size,l1assoc,l1hit,l1miss,&L2,&Watcher);
+        cout<<"test15"<<endl;
         processor CPU(&Icache,&Dcache,&Watcher);
+        cout<<"test1"<<endl;
 
         //dcache info
         Watcher.DcacheSize = l1size;
@@ -107,6 +110,7 @@ int main(int argc, char** argv)
         Watcher.ReadyTime = ready;
         Watcher.ChunkSize = bus;
         Watcher.ChunkTime = trans;
+        cout<<"test2"<<endl;
 
         //read in from stdin from gcat
         char op;
@@ -131,6 +135,7 @@ int main(int argc, char** argv)
                         temp=0;
                 }
                 timeTotal += CPU.decode(op, address, bytes);
+                cout<<"test3"<<endl;
         }
         //icache specifics
         Watcher.iHitCount = Icache.hitcount;
@@ -157,5 +162,6 @@ int main(int argc, char** argv)
         Watcher.LTransKickout = L2.transfer;
         Watcher.LFlushKickout = L2.flush;
         Watcher.print();
+        cout<<"test4"<<endl;
         return 0;
 };
