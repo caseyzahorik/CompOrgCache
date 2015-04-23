@@ -1,5 +1,7 @@
 #include <iostream>
+#include <fstream>
 #include <cstdio>
+#include <string>
 #include "types.h"
 #include "way.h"
 #include "watcher.h"
@@ -33,6 +35,43 @@ int main(int argc, char** argv)
         int l1miss = 1;
 
         if(argc==2)
+        {
+
+                ifstream config;
+                config.open(string(argv[1]));
+                if(config.is_open())
+                {
+                        int c_args[16];
+                        string temp;
+                        for(int i=0;i<15;i++)
+                        {
+                                getline(config,temp);
+                                c_args[i] = stoi(temp,nullptr,10);
+                        }
+                        send    = c_args[0];
+                        ready   = c_args[1];
+                        trans   = c_args[2];
+                        bus     = c_args[3];
+                        l2block = c_args[4];
+                        l2size  = c_args[5];
+                        l2assoc = c_args[6];
+                        l2hit   = c_args[7];
+                        l2miss  = c_args[8];
+                        l2trans = c_args[9];
+                        l2bus   = c_args[10];
+                        l1block = c_args[11];
+                        l1size  = c_args[12];
+                        l1assoc = c_args[13];
+                        l1hit   = c_args[14];
+                        l1miss  = c_args[15];
+                        config.close();
+                }
+                else
+                {
+                        cout<<"failed to open config file"<<endl;
+                        return 0;
+                }
+        }
         //put in config file stuff here!
         //if(argv[1] == NULL)
         //{
