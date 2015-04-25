@@ -20,6 +20,7 @@ public:
         way** set;
         int sets;// number of sets
         ull blockSizeMask;
+        ull blockShift;
         ull indexMask;
         ull indexShift;
         l2cache* L2;

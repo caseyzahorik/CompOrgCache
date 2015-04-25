@@ -14,6 +14,7 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
         mainMemory = Memory;
         sets = cacheSize/(blockSize*associativity);
         blockSizeMask = ~((ull)block-1);
+        blockShift = std::log2(blockSize);
         indexMask = ((ull)sets-1);
         indexShift = std::log2(sets);
         set = new way*[sets];
@@ -40,33 +41,12 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
         flush=0;
 }
 
-//l2cache::~l2cache()
-//{
-//        way* head=nullptr;
-//        for(int i=0;i<sets;i++)
-//        {
-//                head = set[i];
-//                while(head->next!=nullptr)
-//                {
-//                        head=head->next;
-//                }
-//                while(head->prev!=nullptr)
-//                {
-//                        head=head->prev;
-//                        delete(head->next);
-//                }
-//                delete(head);
-//        }
-//        delete[] set;
-//        cout<<"delete : "<<endl;
-//}
-
 ull l2cache::read(ull address,int block)
 {
         requests++;
         ull time=0;
         address=address&blockSizeMask;
-        int index = address>>indexShift;
+        ull index = address>>(blockShift);
         index&=indexMask;
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
@@ -96,7 +76,7 @@ ull l2cache::write(ull address,int block)
         requests++;
         ull time=0;
         address=address&blockSizeMask;
-        int index = address>>indexShift;
+        ull index = address>>(blockShift);
         index&=indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
@@ -113,6 +93,7 @@ ull l2cache::write(ull address,int block)
                         kickouts++;
                         time+=mainMemory->transferData(blockSize);
                 }
+                set[index]->write(&set[index],address);
         }
         else
         {

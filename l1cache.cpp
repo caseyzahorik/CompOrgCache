@@ -12,6 +12,7 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watc
         L2 = l2;
         sets = (cacheSize/(associativity*blockSize));
         blockSizeMask = ~((ull)block-1);
+        blockShift = std::log2(blockSize);
         indexMask = ((ull)sets-1);
         indexShift = std::log2(sets);
         set = new way*[sets];
@@ -38,32 +39,12 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watc
         flush=0;
 }
 
-//l1cache::~l1cache()
-//{
-//        way* head=nullptr;
-//        for(int i=0;i<sets;i++)
-//        {
-//                head = set[i];
-//                while(head->next!=nullptr)
-//                {
-//                        head=head->next;
-//                }
-//                while(head->prev!=nullptr)
-//                {
-//                        head=head->prev;
-//                        delete(head->next);
-//                }
-//                delete(head);
-//        }
-//        delete[] set;
-//}
-
 ull l1cache::read(ull address)
 {
         requests++;
         ull time=0;
         address=address&blockSizeMask;
-        int index = address>>indexShift;
+        ull index = address>>(blockShift);
         index&=indexMask;
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
@@ -93,7 +74,7 @@ ull l1cache::write(ull address)
         requests++;
         ull time=0;
         address=address&blockSizeMask;
-        int index = address>>indexShift;
+        ull index = address>>(blockShift);
         index&=indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
@@ -110,6 +91,7 @@ ull l1cache::write(ull address)
                         kickouts++;
                         time+=L2->write(writeback.address,blockSize);
                 }
+                set[index]->write(&set[index],address);
         }
         else
         {

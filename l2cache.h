@@ -23,6 +23,7 @@ public:
         way** set;
         int sets;
         ull blockSizeMask;
+        ull blockShift;
         ull indexMask;
         ull indexShift;
         memory* mainMemory;
