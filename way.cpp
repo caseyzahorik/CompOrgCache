@@ -21,29 +21,35 @@ way::way(way* Prev,way* Next)
 
 int way::promote(way** head)
 {
-        //way* node=*head;
-        //while(node->next!=nullptr)
-        //{
-        //        node=node->next;
-        //}
-        //(node->prev)->next = nullptr;
-        //node->prev = nullptr;
-        //node->next = *head;
-        //(*head)->prev = node;
-        //*head = node;
-
-        if(prev!=nullptr)
+        way* node=*head;
+        while(node->next!=nullptr)
         {
-                if(next!=nullptr)
-                {
-                        next->prev = prev;
-                }
-                prev->next = next;
-                prev = nullptr;
-                next = *head;
-                (*head)->prev = this;
-                *head = this;
+                node=node->next;
         }
+        if(node!=*head)
+        {
+                (node->prev)->next = nullptr;
+                node->prev = nullptr;
+                node->next = *head;
+                (*head)->prev = node;
+                *head = node;
+        }
+        //
+
+        //
+        //if(prev!=nullptr)
+        //{
+        //        if(next!=nullptr)
+        //        {
+        //                next->prev = prev;
+        //        }
+        //        prev->next = next;
+        //        prev = nullptr;
+        //        next = *head;
+        //        (*head)->prev = this;
+        //        *head = this;
+        //}
+        //
         return 0;
 }
 

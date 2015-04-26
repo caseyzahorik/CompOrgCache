@@ -4,8 +4,8 @@ Memory system:
   L2-cache size = 32768 : ways = 512 : block size = 64
   Memory ready time = 30 : chunksize = 8 : chunktime = 15
 
-Execute time = 2884714; Total refs = 1000000
-Flush time = 85724
+Execute time = 3135657; Total refs = 1000000
+Flush time = 88125
 Inst refs = 725772; Data refs = 274228
 
 Number of reference types: [Percentage]
@@ -15,36 +15,36 @@ Number of reference types: [Percentage]
   Total  = 1000000
 
 Total cycles for activities: [Percentage]
-  Reads  = 515692  [17.9]
-  Writes = 913705  [31.7]
-  Inst.  = 1369593  [47.5]
-  Total  = 2884714
+  Reads  = 611602  [19.5]
+  Writes = 1036545  [33.1]
+  Inst.  = 1399385  [44.6]
+  Total  = 3135657
 
 Average cycles per activity:
-  Read = 3.0; Write = 9.2; Inst = 1.9
+  Read = 3.5; Write = 10.4; Inst = 1.9
 Ideal: Exec. Time = 1725772; CPI = 2.4
 Ideal mis-aligned: Exec. Time = 2237653; CPI = 3.1
 
 Memory Level: L1i
-  Hit Count = 1212724 Miss Count = 1375
+  Hit Count = 1212537 Miss Count = 1562
   Total Requests = 1214099
   Hit Rate = 99.9% Miss Rate = 0.1%
-  Kickouts = 1111; Dirty kickouts = 0; Transfers= 1375
+  Kickouts = 1299; Dirty kickouts = 0; Transfers= 1562
   Flush Kickouts = 0
 
 Memory Level: L1d
-  Hit Count = 290409 Miss Count = 7373
+  Hit Count = 289400 Miss Count = 8382
   Total Requests = 297782
-  Hit Rate = 97.5% Miss Rate = 2.5%
-  Kickouts = 6861; Dirty kickouts = 4701; Transfers= 7583
+  Hit Rate = 97.2% Miss Rate = 2.8%
+  Kickouts = 7870; Dirty kickouts = 4879; Transfers= 8592
   Flush Kickouts = 210
 
 Memory Level: L2
-  Hit Count = 8859 Miss Count = 4800
-  Total Requests = 13659
-  Hit Rate = 64.9% Miss Rate = 35.1%
-  Kickouts = 3776; Dirty kickouts = 1723; Transfers= 5312
-  Flush Kickouts = 512
+  Hit Count = 9362 Miss Count = 5671
+  Total Requests = 15033
+  Hit Rate = 62.3% Miss Rate = 37.7%
+  Kickouts = 4701; Dirty kickouts = 2275; Transfers= 6154
+  Flush Kickouts = 483
 
 L1 cache cost (Icache $1800) + (Dcache $1800) = $3600
 L2 cache cost = $500; Memory cost = $75; Total cost = $4175

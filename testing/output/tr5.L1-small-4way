@@ -29,7 +29,7 @@ Memory Level: L1i
   Hit Count = 644 Miss Count = 29
   Total Requests = 673
   Hit Rate = 95.7% Miss Rate = 4.3%
-  Kickouts = 0; Dirty kickouts = 0; Transfers= 29
+  Kickouts = 2; Dirty kickouts = 0; Transfers= 29
   Flush Kickouts = 0
 
 Memory Level: L1d

@@ -4,8 +4,8 @@ Memory system:
   L2-cache size = 32768 : ways = 1 : block size = 64
   Memory ready time = 30 : chunksize = 8 : chunktime = 15
 
-Execute time = 2967415; Total refs = 1000000
-Flush time = 83171
+Execute time = 3110064; Total refs = 1000000
+Flush time = 84697
 Inst refs = 725772; Data refs = 274228
 
 Number of reference types: [Percentage]
@@ -15,35 +15,35 @@ Number of reference types: [Percentage]
   Total  = 1000000
 
 Total cycles for activities: [Percentage]
-  Reads  = 562390  [19.0]
-  Writes = 946433  [31.9]
-  Inst.  = 1375421  [46.4]
-  Total  = 2967415
+  Reads  = 666226  [21.4]
+  Writes = 961974  [30.9]
+  Inst.  = 1397167  [44.9]
+  Total  = 3110064
 
 Average cycles per activity:
-  Read = 3.2; Write = 9.5; Inst = 1.9
+  Read = 3.8; Write = 9.6; Inst = 1.9
 Ideal: Exec. Time = 1725772; CPI = 2.4
 Ideal mis-aligned: Exec. Time = 2237653; CPI = 3.1
 
 Memory Level: L1i
-  Hit Count = 1212712 Miss Count = 1387
+  Hit Count = 1212550 Miss Count = 1549
   Total Requests = 1214099
   Hit Rate = 99.9% Miss Rate = 0.1%
-  Kickouts = 1123; Dirty kickouts = 0; Transfers= 1387
+  Kickouts = 1286; Dirty kickouts = 0; Transfers= 1549
   Flush Kickouts = 0
 
 Memory Level: L1d
-  Hit Count = 290394 Miss Count = 7388
+  Hit Count = 289460 Miss Count = 8322
   Total Requests = 297782
-  Hit Rate = 97.5% Miss Rate = 2.5%
-  Kickouts = 6876; Dirty kickouts = 4704; Transfers= 7598
-  Flush Kickouts = 210
+  Hit Rate = 97.2% Miss Rate = 2.8%
+  Kickouts = 7810; Dirty kickouts = 4888; Transfers= 8534
+  Flush Kickouts = 212
 
 Memory Level: L2
-  Hit Count = 8457 Miss Count = 5232
-  Total Requests = 13689
-  Hit Rate = 61.8% Miss Rate = 38.2%
-  Kickouts = 4208; Dirty kickouts = 1804; Transfers= 5726
+  Hit Count = 9270 Miss Count = 5701
+  Total Requests = 14971
+  Hit Rate = 61.9% Miss Rate = 38.1%
+  Kickouts = 4677; Dirty kickouts = 2079; Transfers= 6195
   Flush Kickouts = 494
 
 L1 cache cost (Icache $800) + (Dcache $800) = $1600

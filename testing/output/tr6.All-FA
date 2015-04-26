@@ -4,7 +4,7 @@ Memory system:
   L2-cache size = 32768 : ways = 512 : block size = 64
   Memory ready time = 30 : chunksize = 8 : chunktime = 15
 
-Execute time = 14524; Total refs = 1000
+Execute time = 14539; Total refs = 1000
 Flush time = 0
 Inst refs = 776; Data refs = 224
 
@@ -15,13 +15,13 @@ Number of reference types: [Percentage]
   Total  = 1000
 
 Total cycles for activities: [Percentage]
-  Reads  = 5156  [35.5]
+  Reads  = 5171  [35.6]
   Writes = 3346  [23.0]
-  Inst.  = 6022  [41.5]
-  Total  = 14524
+  Inst.  = 6022  [41.4]
+  Total  = 14539
 
 Average cycles per activity:
-  Read = 31.8; Write = 54.0; Inst = 7.8
+  Read = 31.9; Write = 54.0; Inst = 7.8
 Ideal: Exec. Time = 1776; CPI = 2.3
 Ideal mis-aligned: Exec. Time = 2518; CPI = 3.2
 
@@ -36,13 +36,13 @@ Memory Level: L1d
   Hit Count = 349 Miss Count = 67
   Total Requests = 416
   Hit Rate = 83.9% Miss Rate = 16.1%
-  Kickouts = 0; Dirty kickouts = 0; Transfers= 67
+  Kickouts = 2; Dirty kickouts = 1; Transfers= 67
   Flush Kickouts = 0
 
 Memory Level: L2
-  Hit Count = 44 Miss Count = 66
-  Total Requests = 110
-  Hit Rate = 40.0% Miss Rate = 60.0%
+  Hit Count = 45 Miss Count = 66
+  Total Requests = 111
+  Hit Rate = 40.5% Miss Rate = 59.5%
   Kickouts = 0; Dirty kickouts = 0; Transfers= 66
   Flush Kickouts = 0
 

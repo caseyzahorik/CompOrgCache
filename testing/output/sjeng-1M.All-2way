@@ -4,8 +4,8 @@ Memory system:
   L2-cache size = 32768 : ways = 2 : block size = 64
   Memory ready time = 30 : chunksize = 8 : chunktime = 15
 
-Execute time = 2954739; Total refs = 1000000
-Flush time = 83804
+Execute time = 3164102; Total refs = 1000000
+Flush time = 81245
 Inst refs = 725772; Data refs = 274228
 
 Number of reference types: [Percentage]
@@ -15,36 +15,36 @@ Number of reference types: [Percentage]
   Total  = 1000000
 
 Total cycles for activities: [Percentage]
-  Reads  = 538713  [18.2]
-  Writes = 945901  [32.0]
-  Inst.  = 1386321  [46.9]
-  Total  = 2954739
+  Reads  = 667789  [21.1]
+  Writes = 1017872  [32.2]
+  Inst.  = 1397196  [44.2]
+  Total  = 3164102
 
 Average cycles per activity:
-  Read = 3.1; Write = 9.5; Inst = 1.9
+  Read = 3.8; Write = 10.2; Inst = 1.9
 Ideal: Exec. Time = 1725772; CPI = 2.4
 Ideal mis-aligned: Exec. Time = 2237653; CPI = 3.1
 
 Memory Level: L1i
-  Hit Count = 1212616 Miss Count = 1483
+  Hit Count = 1212549 Miss Count = 1550
   Total Requests = 1214099
   Hit Rate = 99.9% Miss Rate = 0.1%
-  Kickouts = 1219; Dirty kickouts = 0; Transfers= 1483
+  Kickouts = 1286; Dirty kickouts = 0; Transfers= 1550
   Flush Kickouts = 0
 
 Memory Level: L1d
-  Hit Count = 290232 Miss Count = 7550
+  Hit Count = 287010 Miss Count = 10772
   Total Requests = 297782
-  Hit Rate = 97.5% Miss Rate = 2.5%
-  Kickouts = 7038; Dirty kickouts = 4736; Transfers= 7760
-  Flush Kickouts = 210
+  Hit Rate = 96.4% Miss Rate = 3.6%
+  Kickouts = 10260; Dirty kickouts = 6120; Transfers= 10983
+  Flush Kickouts = 211
 
 Memory Level: L2
-  Hit Count = 8839 Miss Count = 5140
-  Total Requests = 13979
-  Hit Rate = 63.2% Miss Rate = 36.8%
-  Kickouts = 4116; Dirty kickouts = 1786; Transfers= 5640
-  Flush Kickouts = 500
+  Hit Count = 12901 Miss Count = 5752
+  Total Requests = 18653
+  Hit Rate = 69.2% Miss Rate = 30.8%
+  Kickouts = 4730; Dirty kickouts = 2009; Transfers= 6240
+  Flush Kickouts = 488
 
 L1 cache cost (Icache $400) + (Dcache $400) = $800
 L2 cache cost = $100; Memory cost = $75; Total cost = $975

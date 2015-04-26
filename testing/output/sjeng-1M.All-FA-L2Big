@@ -4,8 +4,8 @@ Memory system:
   L2-cache size = 65536 : ways = 1024 : block size = 64
   Memory ready time = 30 : chunksize = 8 : chunktime = 15
 
-Execute time = 2802829; Total refs = 1000000
-Flush time = 162350
+Execute time = 2932669; Total refs = 1000000
+Flush time = 136611
 Inst refs = 725772; Data refs = 274228
 
 Number of reference types: [Percentage]
@@ -15,36 +15,36 @@ Number of reference types: [Percentage]
   Total  = 1000000
 
 Total cycles for activities: [Percentage]
-  Reads  = 480606  [17.1]
-  Writes = 782712  [27.9]
-  Inst.  = 1377161  [49.1]
-  Total  = 2802829
+  Reads  = 534978  [18.2]
+  Writes = 873885  [29.8]
+  Inst.  = 1387195  [47.3]
+  Total  = 2932669
 
 Average cycles per activity:
-  Read = 2.8; Write = 7.8; Inst = 1.9
+  Read = 3.1; Write = 8.8; Inst = 1.9
 Ideal: Exec. Time = 1725772; CPI = 2.4
 Ideal mis-aligned: Exec. Time = 2237653; CPI = 3.1
 
 Memory Level: L1i
-  Hit Count = 1212724 Miss Count = 1375
+  Hit Count = 1212537 Miss Count = 1562
   Total Requests = 1214099
   Hit Rate = 99.9% Miss Rate = 0.1%
-  Kickouts = 1111; Dirty kickouts = 0; Transfers= 1375
+  Kickouts = 1299; Dirty kickouts = 0; Transfers= 1562
   Flush Kickouts = 0
 
 Memory Level: L1d
-  Hit Count = 290409 Miss Count = 7373
+  Hit Count = 289400 Miss Count = 8382
   Total Requests = 297782
-  Hit Rate = 97.5% Miss Rate = 2.5%
-  Kickouts = 6861; Dirty kickouts = 4701; Transfers= 7583
+  Hit Rate = 97.2% Miss Rate = 2.8%
+  Kickouts = 7870; Dirty kickouts = 4879; Transfers= 8592
   Flush Kickouts = 210
 
 Memory Level: L2
-  Hit Count = 9014 Miss Count = 4645
-  Total Requests = 13659
-  Hit Rate = 66.0% Miss Rate = 34.0%
-  Kickouts = 2756; Dirty kickouts = 890; Transfers= 5640
-  Flush Kickouts = 995
+  Hit Count = 10086 Miss Count = 4947
+  Total Requests = 15033
+  Hit Rate = 67.1% Miss Rate = 32.9%
+  Kickouts = 3283; Dirty kickouts = 1417; Transfers= 5775
+  Flush Kickouts = 828
 
 L1 cache cost (Icache $1800) + (Dcache $1800) = $3600
 L2 cache cost = $600; Memory cost = $75; Total cost = $4275
