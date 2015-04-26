@@ -49,9 +49,9 @@ ull l1cache::read(ull address)
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
                 misscount++;
+                transfer++;
                 time+=missTime+L2->read(address,blockSize);
                 k_ret writeback = set[index]->fill(&set[index],address);
-                transfer++;
                 if(writeback.valid)
                 {
                         if(writeback.dirty)
@@ -61,6 +61,7 @@ ull l1cache::read(ull address)
                         }
                         kickouts++;
                 }
+                set[index]->read(&set[index],address);
         }
         else
         {
@@ -79,9 +80,9 @@ ull l1cache::write(ull address)
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
                 misscount++;
+                transfer++;
                 time+=missTime+L2->read(address,blockSize);
                 k_ret writeback = set[index]->fill(&set[index],address);
-                transfer++;
                 if(writeback.valid)
                 {
                         if(writeback.dirty)

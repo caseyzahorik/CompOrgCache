@@ -21,6 +21,17 @@ way::way(way* Prev,way* Next)
 
 int way::promote(way** head)
 {
+        //way* node=*head;
+        //while(node->next!=nullptr)
+        //{
+        //        node=node->next;
+        //}
+        //(node->prev)->next = nullptr;
+        //node->prev = nullptr;
+        //node->next = *head;
+        //(*head)->prev = node;
+        //*head = node;
+
         if(prev!=nullptr)
         {
                 if(next!=nullptr)
@@ -41,7 +52,7 @@ int way::read(way** head, ull address)
         way* node = *head;
         while(node!=nullptr)
         {
-                if(node->valid&&node->tag==address)
+                if(node->valid && node->tag==address)
                 {
                         node->promote(head);
                         return 0;
@@ -59,7 +70,7 @@ int way::write(way** head, ull address)
         way* node = *head;
         while(node!=nullptr)
         {
-                if(node->valid&&node->tag==address)
+                if(node->valid && node->tag==address)
                 {
                         node->dirty = true;
                         node->promote(head);
