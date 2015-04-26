@@ -119,7 +119,7 @@ int watcher::print()
         cout<<"Average cycles per activity:";
         cout<<endl<<"  Read = "<<AvgRead<<"; ";
         cout<<"Write = "<<AvgWrite<<"; ";
-        cout<<"Inst = "<<AvgInst<<"; ";
+        cout<<"Inst = "<<AvgInst;
         cout<<endl;
         cout<<"Ideal: Exec. Time = ";
         IdealAlign = TotalRef+InstRef;
@@ -141,8 +141,8 @@ int watcher::print()
         cout<<" Miss Rate = "<<percentage<<"%"<<endl;
         cout<<"  Kickouts = "<<iKickouts<<"; ";
         cout<<"Dirty kickouts = "<<iDirtyKickout<<"; ";
-        cout<<"Transfers= "<<iTransKickout<<"; "<<endl;
-        cout<<"Flush Kickouts = "<<iFlushKickout<<endl;
+        cout<<"Transfers= "<<iTransKickout<<endl;
+        cout<<"  Flush Kickouts = "<<iFlushKickout<<endl;
         cout<<endl;
         //l1d memory
         cout<<"Memory Level: L1d"<<endl;
@@ -154,9 +154,9 @@ int watcher::print()
         percentage = float(100)*float(dMissCount)/float(dRequests);
         cout<<" Miss Rate = "<<percentage<<"%"<<endl;
         cout<<"  Kickouts = "<<dKickouts<<"; ";
-        cout<<"Dirty Kickouts = "<<dDirtyKickout<<"; ";
-        cout<<"Transfers= "<<dTransKickout<<"; "<<endl;
-        cout<<"Flush Kickouts = "<<dFlushKickout<<endl;
+        cout<<"Dirty kickouts = "<<dDirtyKickout<<"; ";
+        cout<<"Transfers= "<<dTransKickout<<endl;
+        cout<<"  Flush Kickouts = "<<dFlushKickout<<endl;
         cout<<endl;
         //l2 memory
         cout<<"Memory Level: L2"<<endl;
@@ -168,9 +168,9 @@ int watcher::print()
         percentage = float(100)*float(LMissCount)/float(LRequests);
         cout<<" Miss Rate = "<<percentage<<"%"<<endl;
         cout<<"  Kickouts = "<<LKickouts<<"; ";
-        cout<<"Dirty Kickouts = "<<LDirtyKickout<<"; ";
-        cout<<"Transfers= "<<LTransKickout<<"; "<<endl;
-        cout<<"Flush Kickouts = "<<LFlushKickout<<endl;
+        cout<<"Dirty kickouts = "<<LDirtyKickout<<"; ";
+        cout<<"Transfers= "<<LTransKickout<<endl;
+        cout<<"  Flush Kickouts = "<<LFlushKickout<<endl;
         cout<<endl;
         //l1cost
         dcost = 100*(log2(DcacheWays)+1);

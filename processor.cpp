@@ -38,9 +38,6 @@ ull processor::decode(char op, ull address, uint bytes)
         Watcher->TotalRef++;
         Watcher->ExecuteTime+=time;
         return time;
-        //TODO: determine if the references and counts should
-        //be determined up there, or in the functions below,
-        //to count the actual number of calls made
 }
 
 ull processor::fetchInstr(ull address, uint bytes)

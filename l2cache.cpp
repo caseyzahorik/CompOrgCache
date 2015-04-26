@@ -12,7 +12,7 @@ l2cache::l2cache(int block,int cache,int assoc,int hit,int miss,int trans,int bu
         transferTime = trans;
         busWidth = bus;
         mainMemory = Memory;
-        sets = cacheSize/(blockSize*associativity);
+        sets = (cacheSize/(associativity*blockSize));
         blockSizeMask = ~((ull)block-1);
         blockShift = std::log2(blockSize);
         indexMask = ((ull)sets-1);
@@ -59,9 +59,9 @@ ull l2cache::read(ull address,int block)
                         if(writeback.dirty)
                         {
                                 dirty++;
+                                time+=mainMemory->transferData(blockSize);
                         }
                         kickouts++;
-                        time+=mainMemory->transferData(blockSize);
                 }
         }
         else
@@ -89,9 +89,9 @@ ull l2cache::write(ull address,int block)
                         if(writeback.dirty)
                         {
                                 dirty++;
+                                time+=mainMemory->transferData(blockSize);
                         }
                         kickouts++;
-                        time+=mainMemory->transferData(blockSize);
                 }
                 set[index]->write(&set[index],address);
         }

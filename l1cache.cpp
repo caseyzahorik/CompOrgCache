@@ -57,9 +57,9 @@ ull l1cache::read(ull address)
                         if(writeback.dirty)
                         {
                                 dirty++;
+                                time+=L2->write(writeback.address,blockSize);
                         }
                         kickouts++;
-                        time+=L2->write(writeback.address,blockSize);
                 }
         }
         else
@@ -87,9 +87,9 @@ ull l1cache::write(ull address)
                         if(writeback.dirty)
                         {
                                 dirty++;
+                                time+=L2->write(writeback.address,blockSize);
                         }
                         kickouts++;
-                        time+=L2->write(writeback.address,blockSize);
                 }
                 set[index]->write(&set[index],address);
         }
