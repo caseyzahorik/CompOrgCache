@@ -22,8 +22,8 @@ Total cycles for activities: [Percentage]
 
 Average cycles per activity:
   Read = 29.4; Write = 63.4; Inst = 10.5
-Ideal: Exec. Time = 879; CPI = 0
-Ideal mis-aligned: Exec. Time = 1288; CPI = 0
+Ideal: Exec. Time = 879; CPI = 2.3
+Ideal mis-aligned: Exec. Time = 1288; CPI = 3.4
 
 Memory Level: L1i
   Hit Count = 644 Miss Count = 29
@@ -47,5 +47,5 @@ Memory Level: L2
   Flush Kickouts = 0
 
 L1 cache cost (Icache $1800) + (Dcache $1800) = $3600
-L2 cache cost = $502; Memory cost = $75; Total cost = $4177
+L2 cache cost = $600; Memory cost = $75; Total cost = $4275
 Flushes = 0 : Invalidates = 0

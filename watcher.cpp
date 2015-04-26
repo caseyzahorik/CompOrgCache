@@ -124,11 +124,13 @@ int watcher::print()
         cout<<"Ideal: Exec. Time = ";
         IdealAlign = TotalRef+InstRef;
         cout<<IdealAlign<<"; CPI = ";
-        cout<<0<<endl;//TODO
+        percentage=float(IdealAlign)/float(InstCount);
+        cout<<percentage<<endl;//TODO
         cout<<"Ideal mis-aligned: Exec. Time = ";
         IdealMisAlign = InstRef+iRequests+dRequests;
         cout<<IdealMisAlign<<"; CPI = ";
-        cout<<0<<endl;//TODO
+        percentage=float(IdealMisAlign)/float(InstCount);
+        cout<<percentage<<endl;//TODO
         cout<<endl;
         //l1i memory
         cout<<"Memory Level: L1i"<<endl;
@@ -185,15 +187,18 @@ int watcher::print()
         cout<<endl;
         //l2cost
         temp = 50*(log2(L2Ways));
-        Lcost= L2Size/65536+1;
+        Lcost= (L2Size/65536+1)*50;
         Lcost+=temp;
         cout<<"L2 cache cost = $";
         cout<<Lcost<<"; ";
         //main mem cost
-        cout<<"Memory cost = $75; ";
+        temp=(50+200*log2(50/ReadyTime));
+        temp+=(25+100*log2(ChunkSize/8));
+        cout<<"Memory cost = $";
+        cout<<temp<<"; ";
         //total cost
         cout<<"Total cost = $";
-        temp = 75+Lcost+icost+dcost;
+        temp = temp+Lcost+icost+dcost;
         cout<<temp<<endl;
         //flush and invalidate
         cout<<"Flushes = "<<Flushes<<" : ";
