@@ -107,6 +107,7 @@ int main(int argc, char** argv)
         ull temp=0;
         while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
         {
+                timeTotal += CPU.decode(op, address, bytes);
                 if(op=='I') flush++;
                 if(flush==380000)
                 {
@@ -120,7 +121,6 @@ int main(int argc, char** argv)
                         Watcher.Invalidates++;
                         temp=0;
                 }
-                timeTotal += CPU.decode(op, address, bytes);
         }
         //icache specifics
         Watcher.iHitCount = Icache.hitcount;

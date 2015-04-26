@@ -11,7 +11,7 @@ l1cache::l1cache(int block,int cache,int assoc,int hit,int miss,l2cache* l2,watc
         missTime = miss;
         L2 = l2;
         sets = (cacheSize/(associativity*blockSize));
-        blockSizeMask = ~((ull)block-1);
+        blockSizeMask = ~((ull)blockSize-1);
         blockShift = std::log2(blockSize);
         indexMask = ((ull)sets-1);
         indexShift = std::log2(sets);
