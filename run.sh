@@ -1,8 +1,8 @@
 #!/bin/bash
 
-g++ -Wall -static -O3 --std=c++11 main.cpp processor.cpp l1cache.cpp l2cache.cpp memory.cpp way.cpp watcher.cpp
+#g++ -Wall -static -O3 --std=c++11 main.cpp processor.cpp l1cache.cpp l2cache.cpp memory.cpp way.cpp watcher.cpp
 
-mv a.out testing/
+#mv a.out testing/
 
 cat testing/traces-short/tr1 | testing/a.out config/All-2way.txt             > testing/output/tr1.All-2way &
 cat testing/traces-short/tr1 | testing/a.out config/All-4way.txt             > testing/output/tr1.All-4way &
