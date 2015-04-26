@@ -61,8 +61,8 @@ int way::write(way** head, ull address)
         {
                 if(node->valid&&node->tag==address)
                 {
-                        node->promote(head);
                         node->dirty = true;
+                        node->promote(head);
                         return 0;
                 }
                 else

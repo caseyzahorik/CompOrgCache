@@ -45,7 +45,7 @@ ull l1cache::read(ull address)
         ull time=0;
         address=address&blockSizeMask;
         ull index = address>>(blockShift);
-        index&=indexMask;
+        index = index&indexMask;
         if(set[index]->read(&set[index],address))
         {//note that read returns 0 on success
                 misscount++;
@@ -75,7 +75,7 @@ ull l1cache::write(ull address)
         ull time=0;
         address=address&blockSizeMask;
         ull index = address>>(blockShift);
-        index&=indexMask;
+        index = index&indexMask;
         if(set[index]->write(&set[index],address))
         {//note that read returns 0 on success
                 misscount++;
@@ -108,7 +108,7 @@ ull l1cache::flushAll()
                 way* head = set[i];
                 while(head!=nullptr)
                 {
-                        if(head->dirty)
+                        if(head->dirty&&head->valid)
                         {
                                 flush++;
                                 transfer++;
