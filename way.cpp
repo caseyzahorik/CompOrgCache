@@ -21,35 +21,18 @@ way::way(way* Prev,way* Next)
 
 int way::promote(way** head)
 {
-        way* node=*head;
-        while(node->next!=nullptr)
+        if(prev!=nullptr)
         {
-                node=node->next;
+                if(next!=nullptr)
+                {
+                        next->prev = prev;
+                }
+                prev->next = next;
+                prev = nullptr;
+                next = *head;
+                (*head)->prev = this;
+                *head = this;
         }
-        if(node!=*head)
-        {
-                (node->prev)->next = nullptr;
-                node->prev = nullptr;
-                node->next = *head;
-                (*head)->prev = node;
-                *head = node;
-        }
-        //
-
-        //
-        //if(prev!=nullptr)
-        //{
-        //        if(next!=nullptr)
-        //        {
-        //                next->prev = prev;
-        //        }
-        //        prev->next = next;
-        //        prev = nullptr;
-        //        next = *head;
-        //        (*head)->prev = this;
-        //        *head = this;
-        //}
-        //
         return 0;
 }
 
@@ -90,7 +73,7 @@ int way::write(way** head, ull address)
         return -1;
 }
 
-k_ret way::fill(way** head, ull address)
+k_ret way::poll(way** head)
 {
         k_ret retval;
         way* node = *head;
@@ -101,11 +84,21 @@ k_ret way::fill(way** head, ull address)
         retval.address=node->tag;
         retval.valid=node->valid;
         retval.dirty=node->dirty;
+        return retval;
+}
+
+int way::fill(way** head, ull address)
+{
+        way* node = *head;
+        while(node->next!=nullptr)
+        {
+                node=node->next;
+        }
         node->tag=address;
         node->valid=true;
         node->dirty=false;
         node->promote(head);
-        return retval;
+        return 0;
 }
 
 int way::flush(way** head)

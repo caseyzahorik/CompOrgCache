@@ -12,5 +12,9 @@ memory::memory(int send,int ready,int trans,int bus,watcher* watch)
 
 ull memory::transferData(int size)
 {
+//debug
+//int temp = sendTime+readyTime+transferTime*(size/busWidth);
+//printf("Add memory to L2 transfer time (+ %d)\n",temp);
+//debug
         return (sendTime+readyTime+transferTime*(size/busWidth));
 }

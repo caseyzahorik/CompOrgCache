@@ -45,30 +45,55 @@ ull l2cache::read(ull address,int block)
 {
         requests++;
         ull time=0;
-        address=address&blockSizeMask;
+        ull set_address=address&blockSizeMask;
         ull index = address>>(blockShift);
         index = index&indexMask;
-        if(set[index]->read(&set[index],address))
+        //debug
+        //printf("Level L2 access addr = 0x%llx, reftype = Read\n",address);
+        //printf("    index = 0x%llx, tag =   0x%llx",index,address>>(blockShift+indexShift));
+        //debug
+        if(set[index]->read(&set[index],set_address))
         {//note that read returns 0 on success
                 misscount++;
                 transfer++;
-                time+=missTime+mainMemory->transferData(blockSize);
-                k_ret writeback = set[index]->fill(&set[index],address);
+                k_ret writeback = set[index]->poll(&set[index]);
+                //debug
+                //printf("  MISS\n");
+                //printf("Add L2 miss time (+ 7)\n");
+                //debug
                 if(writeback.valid)
                 {
                         if(writeback.dirty)
                         {
                                 dirty++;
+                                //debug
+                                //printf("Doing dirty writeback\n");
+                                //debug
                                 time+=mainMemory->transferData(blockSize);
                         }
                         kickouts++;
                 }
-                set[index]->read(&set[index],address);
+                //debug
+                //printf("Bringing line into L2.\n");
+                //debug
+                time+=missTime+mainMemory->transferData(blockSize);
+                //debug
+                //printf("Add L2 hit replay time (+ 5)\n");
+                //debug
+                set[index]->fill(&set[index],set_address);
         }
         else
         {
                 hitcount++;
+                //debug
+                //printf("  HIT\n");
+                //printf("Add L2 hit time (+ 5)\n");
+                //debug
         }
+        //debug
+        //printf("Bringing line into L1x\n");
+        //printf("Add L2 to L1 transfer time (+ 10)\n");
+        //debug
         return time+hitTime+transferTime*block/busWidth;
 }
 
@@ -76,30 +101,55 @@ ull l2cache::write(ull address,int block)
 {
         requests++;
         ull time=0;
-        address=address&blockSizeMask;
+        ull set_address=address&blockSizeMask;
         ull index = address>>(blockShift);
         index = index&indexMask;
-        if(set[index]->write(&set[index],address))
+        //debug
+        //printf("Level L2 access addr = 0x%llx, reftype = Write\n",address);
+        //printf("    index = 0x%llx, tag =   0x%llx",index,address>>(blockShift+indexShift));
+        //debug
+        if(set[index]->write(&set[index],set_address))
         {//note that read returns 0 on success
                 misscount++;
                 transfer++;
-                time+=missTime+mainMemory->transferData(blockSize);
-                k_ret writeback = set[index]->fill(&set[index],address);
+                k_ret writeback = set[index]->poll(&set[index]);
+                //debug
+                //printf("  MISS\n");
+                //printf("Add L2 miss time (+ 7)\n");
+                //debug
                 if(writeback.valid)
                 {
                         if(writeback.dirty)
                         {
                                 dirty++;
+                                //debug
+                                //printf("Doing dirty writeback\n");
+                                //debug
                                 time+=mainMemory->transferData(blockSize);
                         }
                         kickouts++;
                 }
-                set[index]->write(&set[index],address);
+                //debug
+                //printf("Bringing line into L2.\n");
+                //debug
+                time+=missTime+mainMemory->transferData(blockSize);
+                //debug
+                //printf("Add L2 hit replay time (+ 5)\n");
+                //debug
+                set[index]->fill(&set[index],set_address);
+                set[index]->write(&set[index],set_address);
         }
         else
         {
                 hitcount++;
+                //debug
+                //printf("  HIT\n");
+                //printf("Add L2 hit time (+ 5)\n");
+                //debug
         }
+        //debug
+        //printf("Add L2 to L1 transfer time (+ 10)\n");
+        //debug
         return time+hitTime+transferTime*block/busWidth;
 }
 

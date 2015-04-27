@@ -11,5 +11,7 @@ typedef struct kickout
         bool dirty;
         bool valid;
 } k_ret;
+#define LINEBREAK "----------------------------------------------------------------"
+ 
 
 #endif

@@ -105,9 +105,21 @@ int main(int argc, char** argv)
         ull timeTotal = 0;
         int flush = 0;
         ull temp=0;
+        //debug
+        //ull cnt=0;
+        //cout<<"Past initialization"<<endl;
+        //debug
         while(scanf("%c %Lx %d\n", &op, &address, &bytes) == 3)
         {
+//debug
+//cout<<LINEBREAK<<endl;
+//printf("Ref %llu: Addr = 0x%llx, Type = %c, BSize = %d\n",cnt,address,op,bytes);
+//cnt++;
+//debug
                 timeTotal += CPU.decode(op, address, bytes);
+//debug
+//printf("Simulated time = %llu\n",timeTotal);
+//debug
                 if(op=='I') flush++;
                 if(flush==380000)
                 {

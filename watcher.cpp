@@ -90,47 +90,48 @@ int watcher::print()
         cout<<"Number of reference types: [Percentage]"<<endl;
         cout<<"  Reads  = "<<ReadCount;
         float percentage=(float)100*float(ReadCount)/float(TotalRef);
-        cout<<"  ["<<percentage<<"]"<<endl;
+        cout<<"  ["<<percentage<<"%]"<<endl;
         cout<<"  Writes = "<<WriteCount;
         percentage = (float)100*float(WriteCount)/float(TotalRef);
-        cout<<"  ["<<percentage<<"]"<<endl;
+        cout<<"  ["<<percentage<<"%]"<<endl;
         cout<<"  Inst.  = "<<InstCount;
         percentage = (float)100*float(InstCount)/float(TotalRef);
-        cout<<"  ["<<percentage<<"]"<<endl;
+        cout<<"  ["<<percentage<<"%]"<<endl;
         cout<<"  Total  = "<<TotalRef<<endl;
         cout<<endl;
         //cycles per type
         cout<<"Total cycles for activities: [Percentage]"<<endl;
         cout<<"  Reads  = "<<ReadCycles;
         percentage = (float)100*float(ReadCycles)/float(ExecuteTime);
-        cout<<"  ["<<percentage<<"]"<<endl;
+        cout<<"  ["<<percentage<<"%]"<<endl;
         cout<<"  Writes = "<<WriteCycles;
         percentage=(float)100*float(WriteCycles)/float(ExecuteTime);
-        cout<<"  ["<<percentage<<"]"<<endl;
+        cout<<"  ["<<percentage<<"%]"<<endl;
+        InstCycles = (ExecuteTime-ReadCycles-WriteCycles);
         cout<<"  Inst.  = "<<InstCycles;
         percentage = (float)100*float(InstCycles)/float(ExecuteTime);
-        cout<<"  ["<<percentage<<"]"<<endl;
+        cout<<"  ["<<percentage<<"%]"<<endl;
         cout<<"  Total  = "<<ExecuteTime<<endl;
         cout<<endl;
         //average cycles per activity
         AvgRead = float(ReadCycles)/float(ReadCount);
         AvgWrite = float(WriteCycles)/float(WriteCount);
-        AvgInst = float(InstCycles)/float(InstCount);
+        AvgInst = float(ExecuteTime)/float(InstCount);
         cout<<"Average cycles per activity:";
         cout<<endl<<"  Read = "<<AvgRead<<"; ";
         cout<<"Write = "<<AvgWrite<<"; ";
-        cout<<"Inst = "<<AvgInst;
+        cout<<"Inst. = "<<AvgInst;
         cout<<endl;
         cout<<"Ideal: Exec. Time = ";
         IdealAlign = TotalRef+InstRef;
         cout<<IdealAlign<<"; CPI = ";
         percentage=float(IdealAlign)/float(InstCount);
-        cout<<percentage<<endl;//TODO
+        cout<<percentage<<endl;
         cout<<"Ideal mis-aligned: Exec. Time = ";
         IdealMisAlign = InstRef+iRequests+dRequests;
         cout<<IdealMisAlign<<"; CPI = ";
         percentage=float(IdealMisAlign)/float(InstCount);
-        cout<<percentage<<endl;//TODO
+        cout<<percentage<<endl;
         cout<<endl;
         //l1i memory
         cout<<"Memory Level: L1i"<<endl;
@@ -140,7 +141,7 @@ int watcher::print()
         percentage = float(100)*float(iHitCount)/float(iRequests);
         cout<<"  Hit Rate = "<<percentage<<"%";
         percentage = float(100)*float(iMissCount)/float(iRequests);
-        cout<<" Miss Rate = "<<percentage<<"%"<<endl;
+        cout<<"  Miss Rate =  "<<percentage<<"%"<<endl;
         cout<<"  Kickouts = "<<iKickouts<<"; ";
         cout<<"Dirty kickouts = "<<iDirtyKickout<<"; ";
         cout<<"Transfers= "<<iTransKickout<<endl;
@@ -154,7 +155,7 @@ int watcher::print()
         percentage = float(100)*float(dHitCount)/float(dRequests);
         cout<<"  Hit Rate = "<<percentage<<"%";
         percentage = float(100)*float(dMissCount)/float(dRequests);
-        cout<<" Miss Rate = "<<percentage<<"%"<<endl;
+        cout<<"  Miss Rate = "<<percentage<<"%"<<endl;
         cout<<"  Kickouts = "<<dKickouts<<"; ";
         cout<<"Dirty kickouts = "<<dDirtyKickout<<"; ";
         cout<<"Transfers= "<<dTransKickout<<endl;
@@ -168,7 +169,7 @@ int watcher::print()
         percentage = float(100)*float(LHitCount)/float(LRequests);
         cout<<"  Hit Rate = "<<percentage<<"%";
         percentage = float(100)*float(LMissCount)/float(LRequests);
-        cout<<" Miss Rate = "<<percentage<<"%"<<endl;
+        cout<<"  Miss Rate = "<<percentage<<"%"<<endl;
         cout<<"  Kickouts = "<<LKickouts<<"; ";
         cout<<"Dirty kickouts = "<<LDirtyKickout<<"; ";
         cout<<"Transfers= "<<LTransKickout<<endl;
@@ -195,7 +196,7 @@ int watcher::print()
         temp=(50+200*log2(50/ReadyTime));
         temp+=(25+100*log2(ChunkSize/8));
         cout<<"Memory cost = $";
-        cout<<temp<<"; ";
+        cout<<temp<<"  ";
         //total cost
         cout<<"Total cost = $";
         temp = temp+Lcost+icost+dcost;

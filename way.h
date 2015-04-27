@@ -19,7 +19,8 @@ public:
         way(way*,way*);
         int read(way** head, ull address);
         int write(way** head, ull address);
-        k_ret fill(way** head, ull address);
+        int fill(way** head, ull address);
+        k_ret poll(way** head);
         int flush(way** head);//flush all ways
 };
 
