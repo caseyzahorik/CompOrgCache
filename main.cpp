@@ -100,9 +100,9 @@ int main(int argc, char** argv)
 
         //read in from stdin from gcat
         char op;
-        ull address;
-        uint bytes;
-        ull timeTotal = 0;
+        unsigned long long int address;
+        unsigned int bytes;
+        unsigned long long int timeTotal = 0;
         int flush = 0;
         ull temp=0;
         //debug
@@ -116,6 +116,7 @@ int main(int argc, char** argv)
 //printf("Ref %llu: Addr = 0x%llx, Type = %c, BSize = %d\n",cnt,address,op,bytes);
 //cnt++;
 //debug
+                //printf("%llu, %c, %llu, %u\n",cnt,op,address,bytes);
                 timeTotal += CPU.decode(op, address, bytes);
 //debug
 //printf("Simulated time = %llu\n",timeTotal);
@@ -123,6 +124,9 @@ int main(int argc, char** argv)
                 if(op=='I') flush++;
                 if(flush==380000)
                 {
+                        //debug
+                        //printf("beginning flush operation");
+                        //debug
                         flush=0;
                         temp += Icache.flushAll();
                         temp += Dcache.flushAll();

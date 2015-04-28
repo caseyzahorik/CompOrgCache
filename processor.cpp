@@ -1,4 +1,5 @@
 #include "processor.h"
+#include <climits>
 
 using namespace std;
 
@@ -43,7 +44,8 @@ ull processor::decode(char op, ull address, uint bytes)
 ull processor::fetchInstr(ull address, uint bytes)
 {
         ull time = 0;
-        ull mask = 0xfffffffffffc;
+        //ull mask = 0xfffffffffffc;
+        ull mask = ULLONG_MAX-3;
         ull base = address&mask;
         ull references = 1+(address-base+(ull)bytes-1)/4;
         for(uint i=0;i<references;i++)
@@ -59,7 +61,7 @@ ull processor::fetchInstr(ull address, uint bytes)
 ull processor::read(ull address,uint bytes)
 {
         ull time = 0;
-        ull mask = 0xfffffffffffc;
+        ull mask = ULLONG_MAX-3;
         ull base = address&mask;
         ull references = 1+(address-base+(ull)bytes-1)/4;
         for(uint i=0;i<references;i++)
@@ -75,7 +77,7 @@ ull processor::read(ull address,uint bytes)
 ull processor::write(ull address, uint bytes)
 {
         ull time = 0;
-        ull mask = 0xfffffffffffc;
+        ull mask = ULLONG_MAX-3;
         ull base = address&mask;
         ull references = 1+(address-base+(ull)bytes-1)/4;
         for(uint i=0;i<references;i++)
