@@ -187,10 +187,11 @@ int watcher::print()
         cout<<dcost<<") = $"<<(icost+dcost);
         cout<<endl;
         //l2cost
-        temp = 50*(log2(L2Ways));
-        Lcost= (L2Size/65536+1)*50;
-        Lcost+=temp;
-        cout<<"L2 cache cost = $";
+        //temp = 50*(log2(L2Ways));
+        //Lcost= (L2Size/65536+1)*50;
+        //Lcost+=temp;
+        Lcost = log2(L2Ways)*50*L2Size/32768 + 50*L2Size/32768; 
+	cout<<"L2 cache cost = $";
         cout<<Lcost<<"; ";
         //main mem cost
         temp=(50+200*log2(50/ReadyTime));
